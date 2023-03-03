@@ -88,7 +88,6 @@ class PLL_TEC {
 			add_action( 'pll_language_defined', array( $this, 'fix_date_translations' ) );
 		}
 
-		// PHPCS:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 		self::$metas = array_merge( $tec->metaTags, $tec->venueTags, $tec->organizerTags, array( '_VenueShowMap', '_VenueShowMapLink' ) );
 
 		if ( isset( $GLOBALS['pagenow'], $_GET['from_post'], $_GET['new_lang'] ) && 'post-new.php' === $GLOBALS['pagenow'] ) {
@@ -390,8 +389,8 @@ class PLL_TEC {
 		}
 
 		// Those are deprecated since TEC 4.0 and should not appear in the list of translatable strings anymore.
-		$tec->taxRewriteSlug = $tec->rewriteSlug . '/category'; // PHPCS:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
-		$tec->tagRewriteSlug = $tec->rewriteSlug . '/tag'; // PHPCS:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+		$tec->taxRewriteSlug = $tec->rewriteSlug . '/category';
+		$tec->tagRewriteSlug = $tec->rewriteSlug . '/tag';
 	}
 
 	/**

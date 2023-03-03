@@ -94,8 +94,8 @@ abstract class PLL_REST_Translated_Object extends PLL_REST_Filtered_Object {
 	 *
 	 * @since 2.2
 	 *
-	 * @param array<mixed> $object Post or Term array.
-	 * @return string|false        Language slug. False if no language is assigned to the object.
+	 * @param array $object Post or Term array.
+	 * @return string|false Language slug. False if no language is assigned to the object.
 	 */
 	public function get_language( $object ) {
 		$language = $this->model->{$this->type}->get_language( $object[ $this->getter_id_name ] );

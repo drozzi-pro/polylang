@@ -29,7 +29,7 @@ class PLL_Share_Post_Slug {
 	/**
 	 * The current language.
 	 *
-	 * @var PLL_Language
+	 * @var PLL_Language|null
 	 */
 	public $curlang;
 
@@ -80,10 +80,12 @@ class PLL_Share_Post_Slug {
 				 * A simpler solution is available at https://github.com/mirsch/polylang-slug/commit/4bf2cb80256fc31347455f6539fac0c20f403c04
 				 * But it supposes that pages sharing slug are translations of each other which we don't.
 				 */
+				/** @var WP_Post|null $queried_object */
 				$queried_object = $this->get_page_by_path( $qv['pagename'], $lang->slug, OBJECT, empty( $qv['post_type'] ) ? 'page' : $qv['post_type'] );
 
 				// If we got nothing or an attachment, check if we also have a post with the same slug. See https://core.trac.wordpress.org/ticket/24612
 				if ( empty( $qv['post_type'] ) && ( empty( $queried_object ) || 'attachment' === $queried_object->post_type ) && preg_match( '/^[^%]*%(?:postname)%/', get_option( 'permalink_structure' ) ) ) {
+					/** @var WP_Post|null $post */
 					$post = $this->get_page_by_path( $qv['pagename'], $lang->slug, OBJECT, 'post' );
 					if ( $post ) {
 						$queried_object = $post;
@@ -109,7 +111,8 @@ class PLL_Share_Post_Slug {
 	 * @param string          $lang      Language slug.
 	 * @param string          $output    Optional. Output type. Accepts OBJECT, ARRAY_N, or ARRAY_A. Default OBJECT.
 	 * @param string|string[] $post_type Optional. Post type or array of post types. Default 'page'.
-	 * @return WP_Post|null WP_Post on success or null on failure.
+	 * @return WP_Post|mixed[]|null WP_Post on success or null on failure.
+	 * @phpstan-return array<int|string, mixed>|WP_Post|null
 	 */
 	protected function get_page_by_path( $page_path, $lang, $output = OBJECT, $post_type = 'page' ) {
 		global $wpdb;
@@ -121,7 +124,7 @@ class PLL_Share_Post_Slug {
 		$parts = array_map( 'sanitize_title_for_query', $parts );
 		$escaped_parts = esc_sql( $parts );
 
-		$in_string = "'" . implode( "','", $escaped_parts ) . "'";
+		$in_string = "'" . implode( "','", (array) $escaped_parts ) . "'";
 
 		if ( is_array( $post_type ) ) {
 			$post_types = $post_type;

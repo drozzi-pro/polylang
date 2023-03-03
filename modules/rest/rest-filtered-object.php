@@ -32,7 +32,7 @@ abstract class PLL_REST_Filtered_Object {
 	/**
 	 * REST request stored for internal usage.
 	 *
-	 * @var WP_REST_Request
+	 * @var WP_REST_Request|null
 	 */
 	protected $request;
 

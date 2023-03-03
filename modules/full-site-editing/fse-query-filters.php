@@ -3,7 +3,7 @@
  * @package Polylang-Pro
  */
 
-defined( 'ABSPATH' ) || exit; // @phpstan-ignore-line
+defined( 'ABSPATH' ) || exit;
 
 /**
  * A class that filters the queries to retrieve the templates in the right language.
@@ -118,7 +118,7 @@ class PLL_FSE_Query_Filters extends PLL_FSE_Abstract_Module implements PLL_Modul
 	 * @since 3.2
 	 *
 	 * @param  WP_Query $query Reference to the `WP_Query` object.
-	 * @return array<mixed>    {
+	 * @return array {
 	 *     An array containing the language object and its array index from the tax query.
 	 *
 	 *     @type PLL_Language|false $language Language object, false if no valid language has been found.
@@ -132,7 +132,7 @@ class PLL_FSE_Query_Filters extends PLL_FSE_Abstract_Module implements PLL_Modul
 	 */
 	private function get_requested_language( WP_Query &$query ) {
 		$sources = array(
-			'tax_query'  => isset( $query->tax_query->queries ) ? $query->tax_query->queries : array(),
+			'tax_query'  => $query->tax_query->queries,
 			'query_vars' => isset( $query->query_vars['tax_query'] ) ? $query->query_vars['tax_query'] : array(),
 		);
 
@@ -165,8 +165,8 @@ class PLL_FSE_Query_Filters extends PLL_FSE_Abstract_Module implements PLL_Modul
 	 *
 	 * @since 3.2
 	 *
-	 * @param  array<mixed> $tax_query An array of taxonomy queries.
-	 * @return array<mixed> {
+	 * @param array $tax_query An array of taxonomy queries.
+	 * @return array {
 	 *     An array containing the language object and its array index from the tax query.
 	 *
 	 *     @type PLL_Language|false $language Language object, false if no valid language has been found.

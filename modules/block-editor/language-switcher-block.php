@@ -27,11 +27,14 @@ class PLL_Language_Switcher_Block extends PLL_Abstract_Language_Switcher_Block {
 	 *
 	 * @since 2.8
 	 * @since 3.2 Renamed according to its parent abstract class.
+	 * @since 3.3 Accepts two new parameters, $content and $block.
 	 *
-	 * @param array $attributes The block attributes.
+	 * @param array    $attributes The block attributes.
+	 * @param string   $content The saved content. Unused.
+	 * @param WP_Block $block The parsed block. Unused.
 	 * @return string Returns the language switcher.
 	 */
-	public function render( $attributes ) {
+	public function render( $attributes, $content, $block ) { //phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable
 		static $dropdown_id = 0;
 		$dropdown_id++;
 
@@ -40,6 +43,7 @@ class PLL_Language_Switcher_Block extends PLL_Abstract_Language_Switcher_Block {
 
 		$attributes = $this->set_attributes_for_block( $attributes );
 
+		$attributes['raw'] = false;
 		$switcher = new PLL_Switcher();
 		$switcher_output = $switcher->the_languages( $this->links, $attributes );
 
@@ -55,7 +59,7 @@ class PLL_Language_Switcher_Block extends PLL_Abstract_Language_Switcher_Block {
 			$wrap_tag = '<div %1$s>%2$s</div>';
 		}
 
-		$wrap_attributes = get_block_wrapper_attributes( $attributes );
+		$wrap_attributes = get_block_wrapper_attributes();
 
 		return sprintf( $wrap_tag, $wrap_attributes, $switcher_output );
 	}

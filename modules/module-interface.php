@@ -3,7 +3,7 @@
  * @package Polylang-Pro
  */
 
-defined( 'ABSPATH' ) || exit; // @phpstan-ignore-line
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Interface to use for modules.

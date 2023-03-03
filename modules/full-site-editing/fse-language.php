@@ -3,7 +3,7 @@
  * @package Polylang-Pro
  */
 
-defined( 'ABSPATH' ) || exit; // @phpstan-ignore-line
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Class that defines PLL's current language in the site editor's screen.

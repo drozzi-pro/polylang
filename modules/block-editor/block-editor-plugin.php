@@ -117,9 +117,13 @@ class PLL_Block_Editor_Plugin {
 	 */
 	private function add_preload_paths_parameters( $preload_paths, $args = array() ) {
 		foreach ( $preload_paths as $k => $path ) {
+			if ( empty( $path ) ) {
+				continue;
+			}
+
 			$query_params = array();
 			// If the method request is OPTIONS, $path is an array and the first element is the path
-			if ( is_array( $path ) && ! empty( $path ) ) {
+			if ( is_array( $path ) ) {
 				$temp_path = $path[0];
 			} else {
 				$temp_path = $path;
@@ -144,7 +148,7 @@ class PLL_Block_Editor_Plugin {
 			// Replace the key by the correct path with query params reordered
 			$sorted_path = add_query_arg( urlencode_deep( $query_params ), $path_parts['path'] );
 
-			if ( is_array( $path ) && ! empty( $path ) ) {
+			if ( is_array( $path ) ) {
 				$preload_paths[ $k ][0] = $sorted_path;
 			} else {
 				$preload_paths[ $k ] = $sorted_path;

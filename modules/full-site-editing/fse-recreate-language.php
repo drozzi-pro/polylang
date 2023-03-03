@@ -3,7 +3,7 @@
  * @package Polylang-Pro
  */
 
-defined( 'ABSPATH' ) || exit; // @phpstan-ignore-line
+defined( 'ABSPATH' ) || exit;
 
 /**
  * A class that re-assigns to templates a language that has just been re-created.
@@ -56,7 +56,7 @@ class PLL_FSE_Recreate_Language extends PLL_FSE_Abstract_Module implements PLL_M
 	 * @since  3.2
 	 * @global wpdb $wpdb
 	 *
-	 * @param array<string|int> $args {
+	 * @param array $args {
 	 *     Arguments used to create the language.
 	 *
 	 *     @type string $name           Language name (used only for display).
@@ -190,20 +190,20 @@ class PLL_FSE_Recreate_Language extends PLL_FSE_Abstract_Module implements PLL_M
 	 *
 	 * @since 3.2
 	 *
-	 * @param  PLL_Language $language A language object.
-	 * @return array<array<string>>   A set of post IDs and post names, grouped by theme ID (term_taxonomy_id of the
-	 *                                'wp_theme' taxonomy). Each result uses the post ID as array key and the post name
-	 *                                (without lang suffix) as array value.
-	 * Example of returned value:
-	 * array(
-	 *     {theme_id} => array(
-	 *         {post_id} => '{post_name}',
-	 *         {post_id} => '{post_name}',
-	 *     ),
-	 *     {theme_id} => array(
-	 *         {post_id} => '{post_name}',
-	 *     ),
-	 * )
+	 * @param PLL_Language $language A language object.
+	 * @return string[][] A set of post IDs and post names, grouped by theme ID (term_taxonomy_id of the
+	 *                    'wp_theme' taxonomy). Each result uses the post ID as array key and the post name
+	 *                    (without lang suffix) as array value.
+	 *                    Example of returned value:
+	 *                    array(
+	 *                        {theme_id} => array(
+	 *                            {post_id} => '{post_name}',
+	 *                            {post_id} => '{post_name}',
+	 *                        ),
+	 *                        {theme_id} => array(
+	 *                            {post_id} => '{post_name}',
+	 *                        ),
+	 *                    )
 	 */
 	private function get_posts_with_lang_suffix( PLL_Language $language ) {
 		global $wpdb;
@@ -257,20 +257,20 @@ class PLL_FSE_Recreate_Language extends PLL_FSE_Abstract_Module implements PLL_M
 	 *
 	 * @since 3.2
 	 *
-	 * @param  array<string> $post_names              List of post names.
-	 * @param  int           $theme_id                `term_taxonomy_id` of the 'wp_theme' taxonomy.
-	 * @return array<array<string|int|array<string>>> {
+	 * @param  string[] $post_names List of post names.
+	 * @param  int      $theme_id   `term_taxonomy_id` of the 'wp_theme' taxonomy.
+	 * @return array[]              {
 	 *     Array of arrays containing the translation groups and their `term_taxonomy_id`.
 	 *
 	 *     @type int           $post_id      Post ID (post in default language).
 	 *     @type string        $post_name    Post slug.
 	 *     @type int           $tt_id        `term_taxonomy_id` of the 'post_translations' taxonomy.`0` means the term
 	 *                                       doesn't exist.
-	 *     @type array<string> $translations List of translations. IDs are not sanitized to keep it simple (the array
+	 *     @type string[]      $translations List of translations. IDs are not sanitized to keep it simple (the array
 	 *                                       can contain other things).
 	 * }
 	 *
-	 * @phpstan-return array<array{post_id:int<0,>,post_name:string,tt_id:int<0,>,translations:array<string>}>
+	 * @phpstan-return array<array{post_id:int<0,max>,post_name:string,tt_id:int<0,max>,translations:array<string>}>
 	 */
 	private function get_translation_groups( array $post_names, $theme_id ) {
 		global $wpdb;
@@ -322,9 +322,9 @@ class PLL_FSE_Recreate_Language extends PLL_FSE_Abstract_Module implements PLL_M
 	 *
 	 * @since 3.2
 	 *
-	 * @param  mixed $translations Raw translation group from the database.
-	 * @return array<string>       Translation IDs are not sanitized to keep it simple (the array can contain other
-	 *                             things).
+	 * @param mixed $translations Raw translation group from the database.
+	 * @return string[] Translation IDs are not sanitized to keep it simple
+	 *                  (the array can contain other things).
 	 */
 	private function format_translations( $translations ) {
 		if ( empty( $translations ) ) {

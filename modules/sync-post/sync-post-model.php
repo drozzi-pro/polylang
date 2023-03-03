@@ -120,7 +120,7 @@ class PLL_Sync_Post_Model {
 	 * @param int    $post_id    Post id of the source post.
 	 * @param string $lang       Target language slug.
 	 * @param bool   $save_group True to update the synchronization group, false otherwise.
-	 * @return int Id of the target post.
+	 * @return int Id of the target post, 0 on failure.
 	 */
 	public function copy_post( $post_id, $lang, $save_group = true ) {
 		global $wpdb;
@@ -129,9 +129,14 @@ class PLL_Sync_Post_Model {
 		$tr_post   = $post = get_post( $post_id );
 		$languages = array_keys( $this->get( $post_id ) );
 
+		if ( ! $tr_post instanceof WP_Post ) {
+			// Something went wrong!
+			return 0;
+		}
+
 		// If it does not exist, create it.
 		if ( ! $tr_id ) {
-			$tr_post->ID = null;
+			$tr_post->ID = 0;
 			$tr_id       = wp_insert_post( wp_slash( get_object_vars( $tr_post ) ) );
 			$this->model->post->set_language( $tr_id, $lang ); // Necessary to do it now to share slug.
 
@@ -178,7 +183,7 @@ class PLL_Sync_Post_Model {
 		}
 
 		$tr_post->ID = $tr_id;
-		$tr_post->post_parent = $this->model->post->get( $post->post_parent, $lang ); // Translates post parent.
+		$tr_post->post_parent = (int) $this->model->post->get( $post->post_parent, $lang ); // Translates post parent.
 		$tr_post = $this->sync_content->copy_content( $post, $tr_post, $lang );
 
 		// The columns to copy in DB.

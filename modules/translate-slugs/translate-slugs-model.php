@@ -112,7 +112,7 @@ class PLL_Translate_Slugs_Model {
 	 * @return string Modified url.
 	 */
 	public function translate_slug( $link, $lang, $type ) {
-		if ( ! empty( $lang ) && isset( $this->translated_slugs[ $type ] ) && ! empty( $this->translated_slugs[ $type ]['slug'] ) ) {
+		if ( $lang instanceof PLL_Language && isset( $this->translated_slugs[ $type ] ) && ! empty( $this->translated_slugs[ $type ]['slug'] ) ) {
 			$link = preg_replace(
 				'#/' . $this->translated_slugs[ $type ]['slug'] . '(/|\?|\#|$)#',
 				'/' . $this->get_translated_slug( $type, $lang->slug ) . '$1',
@@ -300,7 +300,7 @@ class PLL_Translate_Slugs_Model {
 		$slugs = array( $this->translated_slugs[ $type ]['slug'] );
 
 		foreach ( array_keys( $this->translated_slugs[ $type ]['translations'] ) as $lang ) {
-			$slugs[] = $this->translated_slugs[ $type ]['translations'][ $lang ];
+			$slugs[] = preg_quote( $this->translated_slugs[ $type ]['translations'][ $lang ], '#' );
 		}
 
 		return ( $capture ? '(' : '(?:' ) . implode( '|', array_unique( $slugs ) ) . ')/';
@@ -376,9 +376,14 @@ class PLL_Translate_Slugs_Model {
 
 		foreach ( $rules as $key => $rule ) {
 			$query = wp_parse_url( $rule, PHP_URL_QUERY );
+
+			if ( ! is_string( $query ) ) {
+				continue;
+			}
+
 			parse_str( $query, $qv );
 
-			if ( ! empty( $cpts ) && ! empty( $qv['post_type'] ) && in_array( $qv['post_type'], $cpts ) && ! strpos( $rule, 'name=' ) && isset( $this->translated_slugs[ 'archive_' . $qv['post_type'] ] ) ) {
+			if ( ! empty( $cpts ) && ! empty( $qv['post_type'] ) && is_string( $qv['post_type'] ) && in_array( $qv['post_type'], $cpts ) && ! strpos( $rule, 'name=' ) && isset( $this->translated_slugs[ 'archive_' . $qv['post_type'] ] ) ) {
 				$new_slug = $this->get_translated_slugs_pattern( 'archive_' . $qv['post_type'] );
 				$newrules[ str_replace( $this->translated_slugs[ 'archive_' . $qv['post_type'] ]['slug'] . '/', $new_slug, $key ) ] = $rule;
 			} else {
@@ -474,13 +479,22 @@ class PLL_Translate_Slugs_Model {
 	 * @return string
 	 */
 	public function sanitize_string_translation( $translation, $name ) {
-		if ( 0 === strpos( $name, 'slug_' ) ) {
-			// Inspired by category base sanitization.
-			$translation = preg_replace( '#/+#', '/', str_replace( '#', '', $translation ) );
-			$translation = trim( $translation, '/' );
-			$translation = esc_url_raw( $translation );
-			$translation = str_replace( 'http://', '', $translation );
+		if ( 0 !== strpos( $name, 'slug_' ) ) {
+			return $translation;
 		}
+		// Remove some reserved characters that would result in 404.
+		$special_chars = array( '?', '#', '[', ']', '$', '\'', '(', ')', '*', '+', ' ' );
+		$translation = str_replace( $special_chars, '', $translation );
+
+		// Inspired by category base sanitization.
+		$translation = preg_replace( '#/+#', '/', '/' . str_replace( '#', '', $translation ) );
+		if ( empty( $translation ) ) {
+			return '';
+		}
+		$translation = esc_url_raw( $translation );
+		$translation = str_replace( 'http://', '', $translation );
+		$translation = trim( $translation, '/' );
+
 		return $translation;
 	}
 

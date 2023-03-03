@@ -3,7 +3,7 @@
  * @package Polylang-Pro
  */
 
-defined( 'ABSPATH' ) || exit; // @phpstan-ignore-line
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Abstract class for FSE modules.
@@ -22,7 +22,7 @@ abstract class PLL_FSE_Abstract_Module {
 	/**
 	 * Plugin's options.
 	 *
-	 * @var array<mixed>
+	 * @var array
 	 */
 	protected $options;
 
@@ -61,7 +61,7 @@ abstract class PLL_FSE_Abstract_Module {
 	 *
 	 * @since 1.0
 	 *
-	 * @return array<string>
+	 * @return string[]
 	 */
 	protected function get_languages_slugs() {
 		return $this->model->get_languages_list( array( 'fields' => 'slug' ) );

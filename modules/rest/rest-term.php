@@ -80,7 +80,11 @@ class PLL_REST_Term extends PLL_REST_Translated_Object {
 		}
 
 		$controller = $callback[0];
-		$schema     = $controller->get_item_schema();
+		if ( ! $controller instanceof WP_REST_Controller ) {
+			return $slug;
+		}
+
+		$schema = $controller->get_item_schema();
 
 		if ( $schema['title'] !== $this->get_rest_field_type( $taxonomy ) ) {
 			return $slug;

@@ -3,7 +3,7 @@
  * @package Polylang-Pro
  */
 
-defined( 'ABSPATH' ) || exit; // @phpstan-ignore-line
+defined( 'ABSPATH' ) || exit;
 
 /**
  * A class to work with REST routes for templates.
@@ -22,7 +22,7 @@ class PLL_FSE_REST_Route {
 	/**
 	 * The route after regex matching.
 	 *
-	 * @var array<int|string|null> {
+	 * @var array {
 	 *     @type int|null    $post_id   The post ID.
 	 *     @type string|null $post_type The post type.
 	 *     @type string|null $rest_base The REST base matching the supported template types.
@@ -43,9 +43,12 @@ class PLL_FSE_REST_Route {
 	private $match_done = false;
 
 	/**
-	 * List of REST bases for the template (part) post type(s).
+	 * List of REST bases for the template (part) post type(s)
+	 * with post type as array key.
 	 *
-	 * @var array<string> Post type as array key and REST base as array value.
+	 * @var string[]
+	 *
+	 * @phpstan-var array<string,string>
 	 */
 	private $rest_bases = array();
 
@@ -172,8 +175,10 @@ class PLL_FSE_REST_Route {
 	 *
 	 * @since 3.2
 	 *
-	 * @return array<string> Post type as array key and REST "namespace + base" as array value, in the form of
-	 *                       `/{namespace}/{base}`.
+	 * @return string[] Post type as array key and REST "namespace + base" as array value,
+	 *                  in the form of `/{namespace}/{base}`.
+	 *
+	 * @phpstan-return array<string,string>
 	 */
 	private function get_template_rest_bases() {
 		if ( ! empty( $this->rest_bases ) ) {

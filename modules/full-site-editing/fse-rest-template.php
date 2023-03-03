@@ -3,7 +3,7 @@
  * @package Polylang-Pro
  */
 
-defined( 'ABSPATH' ) || exit; // @phpstan-ignore-line
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Expose terms language and translations in the REST API for templates in particular by filtering the queries.
@@ -38,8 +38,8 @@ class PLL_FSE_REST_Template extends PLL_REST_Post {
 	 *
 	 * @since 3.2
 	 *
-	 * @param PLL_REST_API  $rest_api      Instance of PLL_REST_API.
-	 * @param array<string> $content_types Array with post types as keys and values.
+	 * @param PLL_REST_API $rest_api      Instance of PLL_REST_API.
+	 * @param string[]     $content_types Array with post types as keys and values.
 	 * @return void
 	 */
 	public function __construct( PLL_REST_API &$rest_api, array $content_types ) {
@@ -166,9 +166,9 @@ class PLL_FSE_REST_Template extends PLL_REST_Post {
 	 *
 	 * @since 3.2
 	 *
-	 * @param array<mixed> $object Post array.
-	 * @return string|false        Template's language slug. Default language slug if no language is assigned to the
-	 *                             template yet. False on failure.
+	 * @param array $object Post array.
+	 * @return string|false Template's language slug. Default language slug if no language
+	 *                      is assigned to the template yet. False on failure.
 	 */
 	public function get_language( $object ) {
 		if ( ! empty( $object[ $this->getter_id_name ] ) ) {
@@ -193,7 +193,7 @@ class PLL_FSE_REST_Template extends PLL_REST_Post {
 	 *
 	 * @since 3.2
 	 *
-	 * @param  WP_Query $query WP_Query object.
+	 * @param WP_Query $query WP_Query object.
 	 * @return void
 	 */
 	public function parse_query( $query ) {
@@ -313,10 +313,10 @@ class PLL_FSE_REST_Template extends PLL_REST_Post {
 	 *
 	 * @since 3.2
 	 *
-	 * @param  mixed           $result  Response to replace the requested version with. Can be anything a normal
-	 *                                  endpoint can return, or null to not hijack the request.
-	 * @param  WP_REST_Request $request Request used to generate the response.
-	 * @return mixed                    Unchanged value.
+	 * @param mixed           $result  Response to replace the requested version with. Can be anything a normal
+	 *                                 endpoint can return, or null to not hijack the request.
+	 * @param WP_REST_Request $request Request used to generate the response.
+	 * @return mixed                   Unchanged value.
 	 */
 	public function get_current_post_type_from_route( $result, $request ) {
 		if ( ! $request instanceof WP_REST_Request ) {

@@ -3,7 +3,7 @@
  * @package Polylang-Pro
  */
 
-defined( 'ABSPATH' ) || exit; // @phpstan-ignore-line
+defined( 'ABSPATH' ) || exit;
 
 /**
  * An abstract class allowing to bulk edit template slugs.
@@ -17,9 +17,9 @@ abstract class PLL_FSE_Abstract_Bulk_Edit_Template_Slugs_Module extends PLL_FSE_
 	 *
 	 * @since 3.2
 	 *
-	 * @param  PLL_Language $lang          The language to use to find the templates to suffix.
-	 * @param  string|null  $new_lang_slug Optionnal. The new lang slug to use. Default is `$lang`'s slug.
-	 * @return int                         Number of posts updated.
+	 * @param PLL_Language $lang          The language to use to find the templates to suffix.
+	 * @param string|null  $new_lang_slug Optionnal. The new lang slug to use. Default is `$lang`'s slug.
+	 * @return int Number of posts updated.
 	 */
 	protected function update_language_suffix_in_post_names( PLL_Language $lang, $new_lang_slug = null ) {
 		$language_slugs = $this->get_languages_slugs();
@@ -49,8 +49,8 @@ abstract class PLL_FSE_Abstract_Bulk_Edit_Template_Slugs_Module extends PLL_FSE_
 	 *
 	 * @since 3.2
 	 *
-	 * @param  PLL_Language $lang The language to use to find the templates to unsuffix.
-	 * @return int                Number of posts updated.
+	 * @param PLL_Language $lang The language to use to find the templates to unsuffix.
+	 * @return int Number of posts updated.
 	 */
 	protected function remove_language_suffix_from_post_names( PLL_Language $lang ) {
 		$language_slugs = $this->get_languages_slugs();
@@ -79,8 +79,8 @@ abstract class PLL_FSE_Abstract_Bulk_Edit_Template_Slugs_Module extends PLL_FSE_
 	 *
 	 * @since 3.2
 	 *
-	 * @param  PLL_Language $lang The language.
-	 * @return array<stdClass>    {
+	 * @param PLL_Language $lang The language.
+	 * @return stdClass[] {
 	 *     An array of objects with the following properties.
 	 *
 	 *     @type int    $ID        A post ID.
@@ -88,7 +88,7 @@ abstract class PLL_FSE_Abstract_Bulk_Edit_Template_Slugs_Module extends PLL_FSE_
 	 * }
 	 */
 	protected function get_template_posts_from_language( PLL_Language $lang ) {
-		/** @var array<WP_Post> */
+		/** @var WP_Post[] */
 		$results = ( new WP_Query() )->query(
 			array(
 				'post_type'              => PLL_Db_Tools::prepare_values_list( PLL_FSE_Tools::get_post_types() ),
@@ -108,7 +108,7 @@ abstract class PLL_FSE_Abstract_Bulk_Edit_Template_Slugs_Module extends PLL_FSE_
 			)
 		);
 
-		/** @var array<stdClass> $results */
+		/** @var stdClass[] $results */
 		foreach ( $results as $k => $result ) {
 			$results[ $k ] = (object) array(
 				'ID'        => (int) $result->ID,
@@ -122,16 +122,17 @@ abstract class PLL_FSE_Abstract_Bulk_Edit_Template_Slugs_Module extends PLL_FSE_
 	/**
 	 * Updates the slug of the given post.
 	 *
-	 * @since  3.2
+	 * @since 3.2
+	 *
 	 * @global wpdb $wpdb
 	 *
-	 * @param  array<stdClass> $posts {
+	 * @param stdClass[] $posts {
 	 *     An array of objects with the following properties.
 	 *
 	 *     @type int    $ID        A post ID.
 	 *     @type string $post_name The new post slug.
 	 * }
-	 * @return int                    Number of posts updated.
+	 * @return int Number of posts updated.
 	 */
 	protected function update_template_post_slugs( array $posts ) {
 		global $wpdb;

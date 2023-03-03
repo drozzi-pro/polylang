@@ -3,7 +3,7 @@
  * @package Polylang-Pro
  */
 
-defined( 'ABSPATH' ) || exit; // @phpstan-ignore-line
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Class handling the translation of template content during its creation.
@@ -90,8 +90,16 @@ class PLL_FSE_REST_Duplicate_Template extends PLL_FSE_Abstract_Module implements
 	 *
 	 * @since 3.2
 	 *
-	 * @param array<array<mixed>> $blocks   An array of blocks arrays.
-	 * @param string              $language Slug language of the target post.
+	 * @param array[] $blocks {
+	 *     An array of blocks arrays.
+	 *
+	 *     @type string $blockName    Name of block.
+	 *     @type array  $attrs        List of block attributes.
+	 *     @type array  $innerBlocks  List of inner blocks.
+	 *     @type string $innerHTML    Resultant HTML from inside block comment delimiters after removing inner blocks.
+	 *     @type array  $innerContent List of string fragments and null markers where inner blocks were found.
+	 * }
+	 * @param string  $language Slug language of the target post.
 	 * @return array Array of translated blocks.
 	 */
 	public function translate_blocks( $blocks, $language ) {
@@ -115,11 +123,11 @@ class PLL_FSE_REST_Duplicate_Template extends PLL_FSE_Abstract_Module implements
 	 *
 	 * @since 3.2
 	 *
-	 * @param array<string> $attrs    {
+	 * @param string[] $attrs    {
 	 *     string $slug  Template part slug.
 	 *     string $theme Template part theme slug.
 	 * }
-	 * @param string        $language Slug language of the target post.
+	 * @param string   $language Slug language of the target post.
 	 * @return string Slug of the translated template part.
 	 */
 	public function translate_template_part( $attrs, $language ) {

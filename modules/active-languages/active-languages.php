@@ -24,7 +24,7 @@ class PLL_Active_Languages {
 	/**
 	 * Current Language.
 	 *
-	 * @var PLL_Language
+	 * @var PLL_Language|null
 	 */
 	public $curlang;
 
@@ -63,8 +63,8 @@ class PLL_Active_Languages {
 	 *
 	 * @since 1.9
 	 *
-	 * @param string[]       $classes  CSS classes applied to a row in the languages list table.
-	 * @param PLL_Language[] $language The language.
+	 * @param string[]     $classes  CSS classes applied to a row in the languages list table.
+	 * @param PLL_Language $language The language.
 	 * @return string[] Modified list of classes.
 	 */
 	public function row_classes( $classes, $language ) {
@@ -76,8 +76,8 @@ class PLL_Active_Languages {
 	 *
 	 * @since 1.9
 	 *
-	 * @param string         $action   HTML markup of the action to define the default language.
-	 * @param PLL_Language[] $language The Language.
+	 * @param string       $action   HTML markup of the action to define the default language.
+	 * @param PLL_Language $language The Language.
 	 * @return string Modified row action.
 	 */
 	public function remove_default_lang_action( $action, $language ) {
@@ -250,6 +250,6 @@ class PLL_Active_Languages {
 				unset( $languages[ $k ] );
 			}
 		}
-		return $languages;
+		return array_values( $languages );
 	}
 }

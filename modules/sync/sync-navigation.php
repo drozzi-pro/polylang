@@ -36,18 +36,23 @@ class PLL_Sync_Navigation {
 		$this->sync_content = &$polylang->sync_content;
 
 		add_filter( 'pll_translate_blocks', array( $this, 'translate_blocks' ), 10, 3 );
-		add_filter( 'pll_get_post_types', array( $this, 'add_post_type' ), 10, 1 );
+		add_filter( 'pll_get_post_types', array( $this, 'add_post_type' ), 10, 2 );
 	}
 
 	/**
-	 * Add the wp_navigation post type to the list of translatable post types.
+	 * Adds the wp_navigation post type to the list of translatable post types.
 	 *
 	 * @since 3.2
 	 *
 	 * @param string[] $post_types  List of post types.
+	 * @param bool     $is_settings True when displaying the list of custom post types in Polylang settings
 	 * @return string[]
 	 */
-	public function add_post_type( $post_types ) {
+	public function add_post_type( $post_types, $is_settings = false ) {
+		if ( $is_settings || ! is_array( $post_types ) ) {
+			return $post_types;
+		}
+
 		$post_types['wp_navigation'] = 'wp_navigation';
 
 		return $post_types;
@@ -58,9 +63,9 @@ class PLL_Sync_Navigation {
 	 *
 	 * @since 3.2
 	 *
-	 * @param array  $blocks        An array of blocks arrays
-	 * @param string $language      Slug language of the target post.
-	 * @param string $from_language Slug language of the source post.
+	 * @param array[] $blocks        An array of blocks arrays
+	 * @param string  $language      Slug language of the target post.
+	 * @param string  $from_language Slug language of the source post.
 	 * @return array Array of translated blocks.
 	 */
 	public function translate_blocks( $blocks, $language, $from_language ) {
@@ -151,7 +156,21 @@ class PLL_Sync_Navigation {
 
 		// Check the content of the navigation block post to see if there is any block to translate.
 		$tr_post = get_post( $tr_id );
-		$tr_content = $this->sync_content->translate_content( $tr_post->post_content );
+
+		if ( ! $tr_post instanceof WP_Post ) {
+			// Something went wrong!
+			return $id;
+		}
+
+		$from_language   = $this->model->get_language( $from_language );
+		$target_language = $this->model->get_language( $language );
+
+		if ( ! $from_language instanceof PLL_Language || ! $target_language instanceof PLL_Language ) {
+			// Something went wrong!
+			return $tr_id;
+		}
+
+		$tr_content = $this->sync_content->translate_content( $tr_post->post_content, $tr_post, $from_language, $target_language );
 		if ( $tr_content !== $tr_post->post_content ) {
 			$tr_post->post_content = $tr_content;
 			wp_update_post( $tr_post );

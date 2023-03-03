@@ -89,7 +89,7 @@ class PLL_Locale_Fallback {
 			return $file;
 		}
 
-		$dir_path  = dirname( $file ) . DIRECTORY_SEPARATOR;
+		$dir_path  = dirname( $file ) . '/';
 		$file_name = basename( $file );
 		$locale    = preg_quote( $locale, '@' );
 

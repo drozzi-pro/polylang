@@ -41,7 +41,7 @@ class PLL_Pro {
 	public function init( &$polylang ) {
 		if ( $polylang instanceof PLL_Admin_Base ) {
 			load_plugin_textdomain( 'polylang-pro' );
-			new PLL_License( POLYLANG_PRO_FILE, 'Polylang Pro', POLYLANG_VERSION, 'WP SYNTEX' );
+			
 			new PLL_T15S( 'polylang-pro', 'https://packages.translationspress.com/wp-syntex/polylang-pro/packages.json' );
 
 			// Download Polylang language packs.
@@ -83,8 +83,8 @@ class PLL_Pro {
 	 *
 	 * @since 2.1.1
 	 *
-	 * @param stdClass[] $value The value stored in the update_plugins site transient.
-	 * @return stdClass[]
+	 * @param stdClass $value The value stored in the update_plugins site transient.
+	 * @return stdClass
 	 */
 	public function pre_set_site_transient_update_plugins( $value ) {
 		// We encountered a 3rd party plugin setting the transient before the function get_plugins() is available.

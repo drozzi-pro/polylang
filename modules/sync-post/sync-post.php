@@ -45,7 +45,7 @@ class PLL_Sync_Post {
 					new PLL_Sync_Post_Bulk_Option(
 						array(
 							'name'           => 'pll_sync_post',
-							'description'    => __( 'Synchronize original items with translation in selected languages', 'polylang-pro' ),
+							'description'    => __( 'Synchronize translations in selected languages with the original items', 'polylang-pro' ),
 							'do_synchronize' => true,
 							'priority'       => 10,
 						),
@@ -128,15 +128,15 @@ class PLL_Sync_Post {
 	 *
 	 * @since 3.2
 	 *
-	 * @param array<int|array<string>> $tr       {
+	 * @param (int|string[])[] $tr       {
 	 *     List of translations with lang codes as array keys and IDs as array values.
 	 *     Also in this array:
 	 *
-	 *     @type array<string> $sync List of synchronized translations with lang codes as array keys and array values.
+	 *     @type string[] $sync List of synchronized translations with lang codes as array keys and array values.
 	 * }
-	 * @param string                   $old_slug The old language slug.
-	 * @param string                   $new_slug The new language slug.
-	 * @return array<int|array<string>>
+	 * @param string           $old_slug The old language slug.
+	 * @param string           $new_slug The new language slug.
+	 * @return (int|string[])[]
 	 */
 	public function unsync_post( $tr, $old_slug, $new_slug ) {
 		if ( ! is_array( $tr ) || empty( $tr['sync'] ) || ! is_array( $tr['sync'] ) ) {

@@ -181,24 +181,24 @@ class PLL_REST_API {
 		// Add current translation in list
 		if ( $post_id = $this->model->post->get_translation( $request->get_param( 'include' ), $lang ) ) {
 			$post = get_post( $post_id );
-			array_unshift( $untranslated_posts, $post );
+			if ( $post instanceof WP_Post ) {
+				array_unshift( $untranslated_posts, $post );
+			}
 		}
 
 		// Format output
 		foreach ( $untranslated_posts as $post ) {
-			if ( $post ) {
-				$values = array(
-					'id'         => $post->ID,
-					'title'      => array(
-						'raw'      => $post->post_title,
-						'rendered' => get_the_title( $post->ID ),
-					),
-				);
-				if ( $request->get_param( 'is_block_editor' ) ) {
-					$values['edit_link'] = get_edit_post_link( $post, 'keep ampersand' );
-				}
-				$return[] = $values;
+			$values = array(
+				'id'         => $post->ID,
+				'title'      => array(
+					'raw'      => $post->post_title,
+					'rendered' => get_the_title( $post->ID ),
+				),
+			);
+			if ( $request->get_param( 'is_block_editor' ) ) {
+				$values['edit_link'] = get_edit_post_link( $post, 'keep ampersand' );
 			}
+			$return[] = $values;
 		}
 
 		return $return;
@@ -209,19 +209,20 @@ class PLL_REST_API {
 	 *
 	 * @since 3.2
 	 *
-	 * @return array<PLL_Language> List of PLL_Language objects
+	 * @return array[] List of PLL_Language objects
+	 * @phpstan-return array<int, array<string, mixed>>
 	 */
 	public function get_languages_list() {
-		$languages = $this->model->get_languages_list();
+		$languages                   = $this->model->get_languages_list();
+		$default_lang_slug           = $this->model->options['default_lang'];
+		$languages_with_default_lang = array();
 
-		$default_lang_slug = $this->model->options['default_lang'];
-
-		foreach ( $languages as $key => $language ) {
-			$language = get_object_vars( $language ); // get_object_vars() is here to avoid setting a $is_default_lang property without defining it in the PLL_Language class.
-			$language['is_default_lang'] = $default_lang_slug === $language['slug'];
-			$languages[ $key ] = $language;
+		foreach ( $languages as $language ) {
+			$language                      = get_object_vars( $language ); // get_object_vars() is here to avoid setting a $is_default_lang property without defining it in the PLL_Language class.
+			$language['is_default_lang']   = $default_lang_slug === $language['slug'];
+			$languages_with_default_lang[] = $language;
 		}
 
-		return $languages;
+		return array_values( $languages_with_default_lang );
 	}
 }

@@ -79,11 +79,25 @@ abstract class PLL_Abstract_Language_Switcher_Block {
 	 * Renders the Polylang's block on server.
 	 *
 	 * @since 3.2
+	 * @since 3.3 Accepts two new parameters, $content and $block.
 	 *
-	 * @param array $attributes The block attributes.
+	 * @param array    $attributes The block attributes.
+	 * @param string   $content    The saved content.
+	 * @param WP_Block $block      The parsed block.
 	 * @return string The HTML string output to serve.
 	 */
-	abstract public function render( $attributes );
+	abstract public function render( $attributes, $content, $block );
+
+	/**
+	 * Returns the supported pieces of inherited context for the block, by default none are supported..
+	 *
+	 * @since 3.3
+	 *
+	 * @return array An array with context subject, default to empty.
+	 */
+	protected function get_context() {
+		return array();
+	}
 
 	/**
 	 * Registers the Polylang's block.
@@ -135,9 +149,10 @@ abstract class PLL_Abstract_Language_Switcher_Block {
 		register_block_type(
 			$this->get_block_name(),
 			array(
-				'editor_script' => $script_handle,
-				'attributes' => $attributes,
+				'editor_script'   => $script_handle,
+				'attributes'      => $attributes,
 				'render_callback' => array( $this, 'render' ),
+				'uses_context'    => $this->get_context(),
 			)
 		);
 
@@ -173,8 +188,8 @@ abstract class PLL_Abstract_Language_Switcher_Block {
 	 *
 	 * @since 3.2
 	 *
-	 * @param array<mixed> $attributes The attributes of the currently rendered block.
-	 * @return array<mixed> The modified attributes if rendered in the block editor.
+	 * @param array $attributes The attributes of the currently rendered block.
+	 * @return array The modified attributes if rendered in the block editor.
 	 */
 	protected function set_attributes_for_block( $attributes ) {
 		$attributes['echo'] = 0;

@@ -3,7 +3,7 @@
  * @package Polylang-Pro
  */
 
-defined( 'ABSPATH' ) || exit; // @phpstan-ignore-line
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Class that changes the template slugs when a language slug changes.
@@ -40,7 +40,7 @@ class PLL_FSE_Language_Slug_Change extends PLL_FSE_Abstract_Bulk_Edit_Template_S
 	 *
 	 * @since 3.2
 	 *
-	 * @param  array<mixed> $args {
+	 * @param array        $args {
 	 *     Arguments used to modify the language. @see PLL_Admin_Model::update_language().
 	 *
 	 *     @type string $name           Language name (used only for display).
@@ -51,7 +51,7 @@ class PLL_FSE_Language_Slug_Change extends PLL_FSE_Abstract_Bulk_Edit_Template_S
 	 *     @type string $no_default_cat Optional, if set, no default category has been created for this language.
 	 *     @type string $flag           Optional, country code, @see flags.php.
 	 * }
-	 * @param  PLL_Language $lang Previous value of the language beeing edited.
+	 * @param PLL_Language $lang Previous value of the language beeing edited.
 	 * @return void
 	 */
 	public function change_template_slugs( $args, $lang ) {

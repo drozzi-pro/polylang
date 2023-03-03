@@ -3,7 +3,7 @@
  * @package Polylang-Pro
  */
 
-defined( 'ABSPATH' ) || exit; // @phpstan-ignore-line
+defined( 'ABSPATH' ) || exit;
 
 /**
  * A class that adds the template (part) post type to the list of translatable ones.
@@ -41,9 +41,9 @@ class PLL_FSE_Post_Types implements PLL_Module_Interface {
 	 *
 	 * @since 3.2
 	 *
-	 * @param  array<string> $post_types  List of post type names.
-	 * @param  bool          $is_settings True when displaying the list of custom post types in Polylang settings.
-	 * @return array<string>
+	 * @param string[] $post_types  List of post type names.
+	 * @param bool     $is_settings True when displaying the list of custom post types in Polylang settings.
+	 * @return string[]
 	 */
 	public function add_post_types( $post_types = array(), $is_settings = false ) {
 		if ( $is_settings || ! is_array( $post_types ) ) {
@@ -58,8 +58,8 @@ class PLL_FSE_Post_Types implements PLL_Module_Interface {
 	 *
 	 * @since 3.2
 	 *
-	 * @param  array<array<mixed>> $post_types An array of arrays with post types as keys and options as values.
-	 * @return array<array<mixed>>             The post types without the translated template post type.
+	 * @param array[] $post_types An array of arrays with post types as keys and options as values.
+	 * @return array[] The post types without the translated template post type.
 	 */
 	public function remove_post_types_from_post_rest_api( $post_types ) {
 		if ( ! is_array( $post_types ) ) {

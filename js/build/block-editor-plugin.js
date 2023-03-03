@@ -300,7 +300,6 @@ function utils_getTranslatedPosts( translations, translations_table, lang ) {
 	if ( ! isUndefined( translations ) ) {
 		translatedPosts = new Map( Object.entries( translations ) );
 	}
-	// phpcs:disable PEAR.Functions.FunctionCallSignature.Indent
 	// If we come from another post for creating a new one, we have to update translated posts from the original post
 	// to be able to update translations attribute of the post
 	if ( ! isNil( fromPost ) && ! isNil( fromPost.id ) ) {
@@ -312,7 +311,6 @@ function utils_getTranslatedPosts( translations, translations_table, lang ) {
 			}
 		);
 	}
-	// phpcs:enable PEAR.Functions.FunctionCallSignature.Indent
 	return translatedPosts;
 }
 
@@ -413,7 +411,7 @@ function isCurrentPostRequest( options ){
 	// Return false otherwise
 	return -1 !== postTypeURLs.findIndex(
 		function( element ) {
-			return new RegExp( `${ (0,external_lodash_.escapeRegExp)( element ) }` ).test( options.path ); // phpcs:ignore WordPress.WhiteSpace.OperatorSpacing.NoSpaceBefore, WordPress.WhiteSpace.OperatorSpacing.NoSpaceAfter
+			return new RegExp( `${ (0,external_lodash_.escapeRegExp)( element ) }` ).test( options.path );
 		}
 	) && postId === id;
 }
@@ -666,6 +664,10 @@ const store = (0,external_this_wp_data_.createReduxStore)(
  * Wait for the whole post block editor context has been initialized: current post loaded and languages list initialized.
  */
 const isBlockPostEditorContextInitialized = () => {
+	if ( isNil( select( MODULE_CORE_EDITOR_KEY ) ) ) {
+		return Promise.reject( "Polylang languages panel can't be initialized because block editor isn't fully initialized." );
+	}
+
 	// save url params espacially when a new translation is creating
 	saveURLParams();
 	// call to getCurrentUser to force call to resolvers and initialize state
@@ -866,7 +868,6 @@ function getCurrentTemplateFromDataStore() {
  * Initializes a block editor apiFetch middleware to be able to inject the language in the REST API requests.
  */
 external_this_wp_apiFetch_default().use(
-	// phpcs:disable PEAR.Functions.FunctionCallSignature.Indent
 	( options, next ) => {
 		// If options.url is defined, this is not a REST request but a direct call to post.php for legacy metaboxes, for example.
 		if ( (0,external_lodash_.isUndefined)( options.url ) ) {
@@ -885,7 +886,6 @@ external_this_wp_apiFetch_default().use(
 		}
 		return next( options );
 	}
-	// phpcs:enable PEAR.Functions.FunctionCallSignature.Indent
 );
 
 /**
@@ -959,9 +959,11 @@ if ( typeof jQuery != 'undefined' ) {
 			$.ajaxPrefilter( function ( options, originalOptions, jqXHR ) {
 				if ( -1 != options.url.indexOf( ajaxurl ) || -1 != ajaxurl.indexOf( options.url ) ) {
 
-					function addPolylangParametersAsString() {
-						let str = 'lang=' + getCurrentLanguage()
-						let arr = JSON.stringify( 'lang=' + getCurrentLanguage() )
+				const currentLanguage = getCurrentLanguage();
+				const arr = { 'lang' : currentLanguage };
+
+				function addPolylangParametersAsString() {
+						const str = 'lang=' + currentLanguage;
 						if ( 'undefined' === typeof options.data || '' === options.data.trim() ) {
 							// Only Polylang data need to be send. So it could be as a simple query string.
 							options.data = str;

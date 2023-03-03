@@ -22,16 +22,7 @@ class PLL_ACF_Sync_Metas {
 		// Adds the field setting, except for fields of type layout.
 		foreach ( acf_get_field_types() as $type ) { // Since ACF 5.6.0.
 			if ( 'layout' !== $type->category ) {
-				switch ( $type->name ) {
-					case 'text':
-					case 'textarea':
-					case 'wysiwyg':
-						add_action( "acf/render_field_settings/type={$type->name}", array( $this, 'render_field_settings_text' ) );
-						break;
-					default:
-						add_action( "acf/render_field_settings/type={$type->name}", array( $this, 'render_field_settings_default' ) );
-						break;
-				}
+				add_action( "acf/render_field_settings/type={$type->name}", array( $this, 'render_field_settings' ) );
 			}
 		}
 
@@ -42,6 +33,10 @@ class PLL_ACF_Sync_Metas {
 		// Get the private metas to synchronize. Very late to wait for the complete list.
 		add_filter( 'pll_copy_post_metas', array( $this, 'copy_private_metas' ), 999, 3 );
 		add_filter( 'pll_copy_term_metas', array( $this, 'copy_private_metas' ), 998, 3 );
+
+		// It handles the translations of meta fields for import export.
+		add_filter( 'pll_post_metas_to_export', array( $this, 'get_fields_to_export' ), 10, 2 );
+		add_filter( 'pll_term_metas_to_export', array( $this, 'get_fields_to_export' ), 10, 2 );
 	}
 
 	/**
@@ -70,39 +65,40 @@ class PLL_ACF_Sync_Metas {
 	}
 
 	/**
-	 * Renders translations setting for fields with text (includes the translate option)
-	 *
-	 * @since 2.7
-	 *
-	 * @param array $field ACF field.
-	 * @return void
-	 */
-	public function render_field_settings_text( $field ) {
-		$choices = array(
-			'ignore'    => __( 'Ignore', 'polylang-pro' ),
-			'copy_once' => __( 'Copy once', 'polylang-pro' ),
-			'translate' => __( 'Translate', 'polylang-pro' ),
-			'sync'      => __( 'Synchronize', 'polylang-pro' ),
-		);
-		$default = 'translate';
-		$this->render_field_setting( $field, $choices, $default );
-	}
-
-	/**
 	 * Renders a default translations setting (no translate option).
 	 *
 	 * @since 2.7
+	 * @since 3.3.1 Renamed and merged two methods.
 	 *
 	 * @param array $field ACF field.
 	 * @return void
 	 */
-	public function render_field_settings_default( $field ) {
+	public function render_field_settings( $field ) {
 		$choices = array(
 			'ignore'    => __( 'Ignore', 'polylang-pro' ),
 			'copy_once' => __( 'Copy once', 'polylang-pro' ),
 			'sync'      => __( 'Synchronize', 'polylang-pro' ),
 		);
 		$default = in_array( 'post_meta', PLL()->options['sync'] ) ? 'sync' : 'copy_once';
+
+		switch ( $field['type'] ) {
+			case 'text':
+			case 'textarea':
+			case 'wysiwyg':
+				$default = 'translate';
+				// Intentional fall-through to add the translate option below.
+				
+			case 'oembed':
+			case 'url':
+			case 'email':
+				// Add translate option at the 3rd position. 
+				$choices = array_merge(
+					array_slice( $choices, 0, 2 ),
+					array( 'translate' => __( 'Translate', 'polylang-pro' ) ),
+					array_slice( $choices, -1 )
+				);
+				break;
+		}
 		$this->render_field_setting( $field, $choices, $default );
 	}
 
@@ -179,17 +175,39 @@ class PLL_ACF_Sync_Metas {
 	}
 
 	/**
-	 * Selects the metas to be copied or synchronized.
+	 * Gets the meta fields to translate.
+	 *
+	 * @since 3.3
+	 *
+	 * @param array $keys Array of metas keys to translate.
+	 * @param int   $from ID of the source object.
+	 * @return array Array of updated metas keys to translate.
+	 */
+	public function get_fields_to_export( $keys, $from ) {
+		$translations = $this->get_translation_options( $from );
+
+		$fields_to_export = array();
+		if ( ! empty( $translations['translate'] ) ) {
+			$fields_to_export = array_fill_keys( array_values( $translations['translate'] ), 1 );
+		}
+
+		return array_merge( $keys, $fields_to_export );
+	}
+
+	/**
+	 * Gets the translation options.
 	 *
 	 * @since 2.7
+	 * @since 3.3 The function has been split from copy_metas().
 	 *
-	 * @param string[]   $metas List of custom fields names.
+	 * @param string|int $from  Id of the object from which we copy information.
+	 * @param string|int $to    Id of the object to which we copy information.
 	 * @param bool       $sync  True if it is synchronization, false if it is a copy.
-	 * @param string|int $from  Id of the object from which we copy informations.
-	 * @param string|int $to    Id of the object to which we copy informations.
-	 * @return string[]
+	 * @return array[] A list of arrays 'ignore', 'copy_once', 'translate' and 'sync' with their associated metas.
+	 *
+	 * @phpstan-return array{'ignore': array<int, string>, 'copy_once': array<int, string>, 'translate': array<int, string>, 'sync': array<int, string>}
 	 */
-	public function copy_metas( $metas, $sync, $from, $to ) {
+	protected function get_translation_options( $from, $to = 0, $sync = false ) {
 		// Init the translations array.
 		$translations = array_fill_keys(
 			array(
@@ -216,6 +234,23 @@ class PLL_ACF_Sync_Metas {
 				}
 			}
 		}
+
+		return $translations;
+	}
+
+	/**
+	 * Selects the metas to be copied or synchronized.
+	 *
+	 * @since 2.7
+	 *
+	 * @param string[]   $metas List of custom fields names.
+	 * @param bool       $sync  True if it is synchronization, false if it is a copy.
+	 * @param string|int $from  Id of the object from which we copy information.
+	 * @param string|int $to    Id of the object to which we copy information.
+	 * @return string[]
+	 */
+	public function copy_metas( $metas, $sync, $from, $to ) {
+		$translations = $this->get_translation_options( $from, $to, $sync );
 
 		if ( $sync ) {
 			$metas = array_diff( $metas, $translations['ignore'], $translations['copy_once'], $translations['translate'] );
@@ -254,14 +289,12 @@ class PLL_ACF_Sync_Metas {
 	 * @return string[]
 	 */
 	public function copy_private_metas( $metas, $sync, $from ) {
-		if ( $sync ) {
-			$meta_type = substr( current_filter(), 9, 4 );
+		$meta_type = substr( current_filter(), 9, 4 );
 
-			foreach ( get_metadata( $meta_type, $from ) as $key => $value ) {
-				$value = reset( $value );
-				if ( is_string( $value ) && acf_is_field_key( $value ) && array_search( substr( $key, 1 ), $metas ) ) {
-					$metas[] = $key; // Private keys added to non private.
-				}
+		foreach ( get_metadata( $meta_type, $from ) as $key => $value ) {
+			$value = reset( $value );
+			if ( is_string( $value ) && acf_is_field_key( $value ) ) {
+				$metas[] = $key; // Private keys added to non private.
 			}
 		}
 

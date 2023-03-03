@@ -8,13 +8,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 };
 
 add_action(
-	'init',
+	'after_setup_theme',
 	function() {
-		if ( ! did_action( 'pll_init' ) ) {
-			// Run only if Polylang (and its API) is loaded.
-			return;
-		}
-
 		/**
 		 * This must be checked only after the theme is loaded (not earlier than 'after_setup_theme') because some
 		 * themes include ACF.
@@ -24,8 +19,11 @@ add_action(
 			return;
 		}
 
-		// This must run on 'init'.
-		PLL_Integrations::instance()->acf = new PLL_ACF();
-		PLL_Integrations::instance()->acf->init();
+		if ( ! did_action( 'pll_init' ) || ! PLL()->model->has_languages() ) {
+			// Run only if Polylang (and its API) is loaded, and if there is at least one language.
+			return;
+		}
+
+		add_action( 'init', array( PLL_Integrations::instance()->acf = new PLL_ACF(), 'init' ) );
 	}
 );

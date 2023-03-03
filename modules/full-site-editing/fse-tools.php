@@ -3,7 +3,7 @@
  * @package Polylang-Pro
  */
 
-defined( 'ABSPATH' ) || exit; // @phpstan-ignore-line
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Main class that handles the translation of the templates in full site editing.
@@ -17,7 +17,7 @@ class PLL_FSE_Tools {
 	 *
 	 * @since 3.2
 	 *
-	 * @return array<string> Array keys and array values are identical.
+	 * @return string[] Array keys and array values are identical.
 	 */
 	public static function get_post_types() {
 		return array(
@@ -30,7 +30,7 @@ class PLL_FSE_Tools {
 	 *
 	 * @since 3.2
 	 *
-	 * @param  string $post_type A post type name.
+	 * @param string $post_type A post type name.
 	 * @return bool
 	 */
 	public static function is_template_post_type( $post_type ) {
@@ -42,7 +42,7 @@ class PLL_FSE_Tools {
 	 *
 	 * @since 3.2
 	 *
-	 * @param  WP_Query $query Instance of `WP_Query`.
+	 * @param WP_Query $query Instance of `WP_Query`.
 	 * @return bool
 	 */
 	public static function is_template_query( WP_Query $query ) {
@@ -71,7 +71,8 @@ class PLL_FSE_Tools {
 	/**
 	 * Returns the template post object currently being edited.
 	 *
-	 * @since  3.2
+	 * @since 3.2
+	 *
 	 * @global WP_Post $post
 	 *
 	 * @return WP_Post|null
@@ -107,8 +108,8 @@ class PLL_FSE_Tools {
 	 *
 	 * @since 3.2
 	 *
-	 * @param  string $template_id   Template ID, in the form of `{themeSlug}//{templateSlug}`.
-	 * @param  string $template_type Template type, either 'wp_template' or 'wp_template_part'.
+	 * @param string $template_id   Template ID, in the form of `{themeSlug}//{templateSlug}`.
+	 * @param string $template_type Template type, either 'wp_template' or 'wp_template_part'.
 	 * @return WP_Post|null
 	 */
 	public static function get_post_from_template_id( $template_id, $template_type ) {
@@ -126,8 +127,8 @@ class PLL_FSE_Tools {
 	 *
 	 * @since 3.2
 	 *
-	 * @param  string $template_id Template ID, in the form of `{themeSlug}//{templateSlug}`.
-	 * @return array<string>       {
+	 * @param string $template_id Template ID, in the form of `{themeSlug}//{templateSlug}`.
+	 * @return string[] {
 	 *     An array containing the theme name and the template name. An empty array if the template ID is invalid.
 	 *
 	 *     @type string $theme The theme name (slug).
@@ -158,9 +159,9 @@ class PLL_FSE_Tools {
 	 *
 	 * @since 3.2
 	 *
-	 * @param  string $post_name  Post name (slug).
-	 * @param  string $theme_name Theme name (slug).
-	 * @param  string $post_type  Post type, either 'wp_template' or 'wp_template_part'.
+	 * @param string $post_name  Post name (slug).
+	 * @param string $theme_name Theme name (slug).
+	 * @param string $post_type  Post type, either 'wp_template' or 'wp_template_part'.
 	 * @return WP_Post|null
 	 */
 	public static function query_template_post( $post_name, $theme_name, $post_type ) {
@@ -191,7 +192,8 @@ class PLL_FSE_Tools {
 	/**
 	 * Tells if we're in the site editor.
 	 *
-	 * @since  3.2
+	 * @since 3.2
+	 *
 	 * @global string $pagenow
 	 *
 	 * @return bool

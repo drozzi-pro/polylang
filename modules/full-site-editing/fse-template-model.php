@@ -3,7 +3,7 @@
  * @package Polylang-Pro
  */
 
-defined( 'ABSPATH' ) || exit; // @phpstan-ignore-line
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Model for templates.
@@ -109,6 +109,7 @@ class PLL_FSE_Template_Model extends PLL_FSE_Abstract_Module implements PLL_Modu
 		}
 
 		// Create the post.
+		/** @var int|WP_Error */
 		$new_post_id = wp_insert_post( wp_slash( $post ) );
 
 		if ( empty( $new_post_id ) || is_wp_error( $new_post_id ) ) {
@@ -130,16 +131,22 @@ class PLL_FSE_Template_Model extends PLL_FSE_Abstract_Module implements PLL_Modu
 	/**
 	 * Translates the content of the given template.
 	 *
-	 * @param WP_Post      $target_template  The template to translate.
-	 * @param int          $from_template_id The source template post ID.
-	 * @param PLL_Language $target_language  The target language object.
-	 * @return int|WP_Error The post ID on success. The value 0 or WP_Error on failure.
+	 * @since 3.2
+	 *
+	 * @param  WP_Post      $target_template  The template to translate.
+	 * @param  int          $from_template_id The source template post ID.
+	 * @param  PLL_Language $target_language  The target language object.
+	 * @return int          The post ID on success. The value 0 on failure.
 	 */
 	public function translate_template_content( WP_Post $target_template, $from_template_id, PLL_Language $target_language ) {
-		$this->sync_content->language      = $target_language;
-		$this->sync_content->post_id       = $target_template->ID;
-		$this->sync_content->from_language = $this->model->post->get_language( $from_template_id );
-		$target_template->post_content     = $this->sync_content->translate_content( $target_template->post_content );
+		$from_language = $this->model->post->get_language( $from_template_id );
+
+		if ( ! $from_language instanceof PLL_Language ) {
+			// The source template has no language defined.
+			return 0;
+		}
+
+		$target_template->post_content = $this->sync_content->translate_content( $target_template->post_content, $target_template, $from_language, $target_language );
 
 		return wp_update_post( $target_template );
 	}

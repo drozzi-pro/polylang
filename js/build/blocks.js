@@ -187,7 +187,6 @@ var external_this_wp_components_ = __webpack_require__(893);
 var external_this_wp_primitives_ = __webpack_require__(776);
 ;// CONCATENATED MODULE: ./modules/block-editor/js/icons/library/duplication.js
 
-
 /**
  * Duplication icon - admin-page Dashicon.
  *
@@ -210,7 +209,6 @@ const duplication = isPrimitivesComponents ? (0,external_this_wp_element_.create
 })) : 'admin-page';
 /* harmony default export */ const library_duplication = ((/* unused pure expression or super */ null && (duplication)));
 ;// CONCATENATED MODULE: ./modules/block-editor/js/icons/library/pencil.js
-
 
 /**
  * Pencil icon - edit Dashicon.
@@ -235,7 +233,6 @@ const pencil = pencil_isPrimitivesComponents ? (0,external_this_wp_element_.crea
 /* harmony default export */ const library_pencil = ((/* unused pure expression or super */ null && (pencil)));
 ;// CONCATENATED MODULE: ./modules/block-editor/js/icons/library/plus.js
 
-
 /**
  * Plus icon - plus Dashicon.
  *
@@ -258,7 +255,6 @@ const plus = plus_isPrimitivesComponents ? (0,external_this_wp_element_.createEl
 })) : 'plus';
 /* harmony default export */ const library_plus = ((/* unused pure expression or super */ null && (plus)));
 ;// CONCATENATED MODULE: ./modules/block-editor/js/icons/library/synchronization.js
-
 
 /**
  * Synchronization icon - controls-repeat Dashicon.
@@ -283,7 +279,6 @@ const synchronization = synchronization_isPrimitivesComponents ? (0,external_thi
 /* harmony default export */ const library_synchronization = ((/* unused pure expression or super */ null && (synchronization)));
 ;// CONCATENATED MODULE: ./modules/block-editor/js/icons/library/translation.js
 
-
 /**
  * Translation icon - translation Dashicon.
  *
@@ -306,7 +301,6 @@ const translation = translation_isPrimitivesComponents ? (0,external_this_wp_ele
 })) : 'translation';
 /* harmony default export */ const library_translation = (translation);
 ;// CONCATENATED MODULE: ./modules/block-editor/js/icons/library/trash.js
-
 
 /**
  * Trash icon - trash Dashicon.
@@ -331,7 +325,6 @@ const trash = trash_isPrimitivesComponents ? (0,external_this_wp_element_.create
 /* harmony default export */ const library_trash = ((/* unused pure expression or super */ null && (trash)));
 ;// CONCATENATED MODULE: ./modules/block-editor/js/icons/library/star.js
 
-
 /**
  * Star icon - star-filled Dashicon.
  *
@@ -353,6 +346,34 @@ const star = star_isPrimitivesComponents ? (0,external_this_wp_element_.createEl
   d: "m10 1 3 6 6 .75-4.12 4.62L16 19l-6-3-6 3 1.13-6.63L1 7.75 7 7z"
 })) : 'star-filled';
 /* harmony default export */ const library_star = ((/* unused pure expression or super */ null && (star)));
+;// CONCATENATED MODULE: ./modules/block-editor/js/icons/library/submenu.js
+
+/**
+ * Submenu icon
+ *
+ * @package Polylang-Pro
+ */
+
+/**
+ * WordPress dependencies
+ */
+
+/**
+ * External dependencies
+ */
+
+const submenu_isPrimitivesComponents = !(0,external_lodash_.isUndefined)(wp.primitives);
+const SubmenuIcon = () => submenu_isPrimitivesComponents ? (0,external_this_wp_element_.createElement)(external_this_wp_primitives_.SVG, {
+  xmlns: "http://www.w3.org/2000/svg",
+  width: "12",
+  height: "12",
+  viewBox: "0 0 12 12",
+  fill: "none"
+}, (0,external_this_wp_element_.createElement)(external_this_wp_primitives_.Path, {
+  d: "M1.50002 4L6.00002 8L10.5 4",
+  strokeWidth: "1.5"
+})) : 'submenu';
+/* harmony default export */ const submenu = (SubmenuIcon);
 ;// CONCATENATED MODULE: ./modules/block-editor/js/icons/index.js
 /**
  * Icons library
@@ -366,8 +387,9 @@ const star = star_isPrimitivesComponents ? (0,external_this_wp_element_.createEl
 
 
 
-;// CONCATENATED MODULE: ./modules/block-editor/js/components/language-flag.js
 
+
+;// CONCATENATED MODULE: ./modules/block-editor/js/components/language-flag.js
 
 /**
  * @package Polylang-Pro
@@ -376,6 +398,7 @@ const star = star_isPrimitivesComponents ? (0,external_this_wp_element_.createEl
 /**
  * External dependencies.
  */
+
 
 /**
  * Internal dependencies.
@@ -392,7 +415,6 @@ const star = star_isPrimitivesComponents ? (0,external_this_wp_element_.createEl
  *
  * @return {Object}
  */
-
 function LanguageFlag(_ref) {
   let {
     language
@@ -410,15 +432,15 @@ function LanguageFlag(_ref) {
     className: "pll-translation-icon"
   }, library_translation);
 }
-
 /* harmony default export */ const language_flag = (LanguageFlag);
 ;// CONCATENATED MODULE: ./modules/block-editor/js/components/language-dropdown.js
-
 
 /**
  * @package Polylang-Pro
  */
+
 // External dependencies
+
 
 /**
  * Displays a dropdown to select a language.
@@ -432,7 +454,6 @@ function LanguageFlag(_ref) {
  *
  * @return {Object} A dropdown selector for languages.
  */
-
 function LanguageDropdown(_ref) {
   let {
     handleChange,
@@ -453,6 +474,7 @@ function LanguageDropdown(_ref) {
     className: "post_lang_choice"
   }, children));
 }
+
 /**
  * Map languages objects as options for a <select> tag.
  *
@@ -462,8 +484,6 @@ function LanguageDropdown(_ref) {
  *
  * @return {Object} A list of <option> tags to be used in a <select> tag.
  */
-
-
 function LanguagesOptionsList(_ref2) {
   let {
     languages
@@ -482,13 +502,13 @@ function LanguagesOptionsList(_ref2) {
   });
 }
 
-
 ;// CONCATENATED MODULE: ./modules/block-editor/js/sidebar/settings.js
 /**
  * Module Constants
  *
  * @package Polylang-Pro
  */
+
 const settings_MODULE_KEY = 'pll/metabox';
 const settings_MODULE_CORE_EDITOR_KEY = 'core/editor';
 const settings_MODULE_SITE_EDITOR_KEY = 'core/edit-site';
@@ -503,9 +523,7 @@ const DEFAULT_STATE = {
 };
 const UNTRANSLATABLE_POST_TYPE = (/* unused pure expression or super */ null && (['wp_template']));
 const settings_TEMPLATE_PART_SLUG_SEPARATOR = '___'; // Its value must be synchronized with its equivalent in PHP @see PLL_FSE_Template_Slug::SEPARATOR
-
 const settings_TEMPLATE_PART_SLUG_CHECK_LANGUAGE_PATTERN = '[a-z_-]+'; // Its value must be synchronized with it equivalent in PHP @see PLL_FSE_Template_Slug::SEPARATOR
-
 
 // EXTERNAL MODULE: external {"this":["wp","apiFetch"]}
 var external_this_wp_apiFetch_ = __webpack_require__(514);
@@ -521,6 +539,8 @@ var external_this_wp_url_ = __webpack_require__(470);
 
 
 
+
+
 /**
  * Internal dependencies
  */
@@ -533,7 +553,6 @@ var external_this_wp_url_ = __webpack_require__(470);
  * @param {*}     key   The key in the object used as key to build the map.
  * @returns {Map}
  */
-
 function convertArrayToMap(array, key) {
   const map = new Map();
   array.reduce(function (accumulator, currentValue) {
@@ -542,13 +561,13 @@ function convertArrayToMap(array, key) {
   }, map);
   return map;
 }
+
 /**
  * Converts map to an associative array.
  *
  * @param {Map} map The map to convert.
  * @returns {Object}
  */
-
 function utils_convertMapToObject(map) {
   const object = {};
   map.forEach(function (value, key, map) {
@@ -557,50 +576,50 @@ function utils_convertMapToObject(map) {
   }, object);
   return object;
 }
+
 /**
  * Checks whether the current screen is block-based post type editor.
  *
  * @returns {boolean} True if block editor for post type; false otherwise.
  */
-
 function isPostTypeBlockEditor() {
   return !!document.getElementById('editor');
 }
+
 /**
  * Checks whether the current screen is the block-based widgets editor.
  *
  * @returns {boolean} True if we are in the widgets block editor; false otherwise.
  */
-
 function isWidgetsBlockEditor() {
   return !!document.getElementById('widgets-editor');
 }
+
 /**
  * Checks whether the current screen is the customizer widgets editor.
  *
  * @returns {boolean} True if we are in the customizer widgets editor; false otherwise.
  */
-
 function isWidgetsCustomizerEditor() {
   return !!document.getElementById('customize-controls');
 }
+
 /**
  * Checks whether the current screen is the site editor.
  * Takes in account if Gutenberg is activated.
  *
  * @returns {boolean} True if site editor screen, false otherwise.
  */
-
 function isSiteBlockEditor() {
   return !!(document.getElementById('site-editor') || document.getElementById('edit-site-editor'));
 }
+
 /**
  * Returns the post type URL for REST API calls or undefined if the user hasn't the rights.
  *
  * @param {string} name The post type name.
  * @returns {string|undefined}
  */
-
 function getPostsUrl(name) {
   const postTypes = select('core').getEntitiesByKind('postType');
   const postType = find(postTypes, {
@@ -608,12 +627,12 @@ function getPostsUrl(name) {
   });
   return postType === null || postType === void 0 ? void 0 : postType.baseURL;
 }
+
 /**
  * Gets all query string parameters and convert them in a URLSearchParams object.
  *
  * @returns {Object}
  */
-
 function utils_getSearchParams() {
   // Variable window.location.search is just read for creating and returning a URLSearchParams object to be able to manipulate it more easily.
   if (!isEmpty(window.location.search)) {
@@ -623,38 +642,39 @@ function utils_getSearchParams() {
     return null;
   }
 }
+
 /**
  * Gets selected language.
  *
  * @param {string} lang The post language code.
  * @returns {Object} The selected language.
  */
-
 function getSelectedLanguage(lang) {
-  const languages = select(MODULE_KEY).getLanguages(); // Pick up this language as selected in languages list
-
+  const languages = select(MODULE_KEY).getLanguages();
+  // Pick up this language as selected in languages list
   return languages.get(lang);
 }
+
 /**
  * Gets the default language.
  *
  * @returns {Object} The default Language.
  */
-
 function getDefaultLanguage() {
   const languages = select(MODULE_KEY).getLanguages();
   return Array.from(languages.values()).find(lang => lang.is_default_lang);
 }
+
 /**
  * Checks if the given language is the default one.
  *
  * @param {string} lang The language code to compare with.
  * @returns {boolean} True if the given language is the default one.
  */
-
 function isDefaultLanguage(lang) {
   return lang === getDefaultLanguage().slug;
 }
+
 /**
  * Gets translated posts.
  *
@@ -662,46 +682,39 @@ function isDefaultLanguage(lang) {
  * @param {Object.<string, Object>} translations_table The translations table data with language codes as keys and data object as values.
  * @returns {Map}
  */
-
 function utils_getTranslatedPosts(translations, translations_table, lang) {
   const translationsTable = getTranslationsTable(translations_table, lang);
   const fromPost = select(MODULE_KEY).getFromPost();
   let translatedPosts = new Map(Object.entries([]));
-
   if (!isUndefined(translations)) {
     translatedPosts = new Map(Object.entries(translations));
-  } // phpcs:disable PEAR.Functions.FunctionCallSignature.Indent
+  }
   // If we come from another post for creating a new one, we have to update translated posts from the original post
   // to be able to update translations attribute of the post
-
-
   if (!isNil(fromPost) && !isNil(fromPost.id)) {
     translationsTable.forEach((translationData, lang) => {
       if (!isNil(translationData.translated_post) && !isNil(translationData.translated_post.id)) {
         translatedPosts.set(lang, translationData.translated_post.id);
       }
     });
-  } // phpcs:enable PEAR.Functions.FunctionCallSignature.Indent
-
-
+  }
   return translatedPosts;
 }
+
 /**
  * Gets synchronized posts.
  *
  * @param {Object.<string, boolean>} pll_sync_post The synchronized posts object with language codes as keys and boolean values to say if the post is synchronized or not.
  * @returns {Map}
  */
-
 function getSynchronizedPosts(pll_sync_post) {
   let synchronizedPosts = new Map(Object.entries([]));
-
   if (!isUndefined(pll_sync_post)) {
     synchronizedPosts = new Map(Object.entries(pll_sync_post));
   }
-
   return synchronizedPosts;
 }
+
 /**
  * Gets translations table.
  *
@@ -709,24 +722,22 @@ function getSynchronizedPosts(pll_sync_post) {
  * @param {string} lang The language code.
  * @returns {Map}
  */
-
 function getTranslationsTable(translationsTableDatas, lang) {
-  let translationsTable = new Map(Object.entries([])); // get translations table datas from post
-
+  let translationsTable = new Map(Object.entries([]));
+  // get translations table datas from post
   if (!isUndefined(translationsTableDatas)) {
     // Build translations table map with language slug as key
     translationsTable = new Map(Object.entries(translationsTableDatas));
   }
-
   return translationsTable;
 }
+
 /**
  * Checks if the given request is for saving.
  *
  * @param {Object} options The initial request.
  * @returns {Boolean} True if the request is for saving.
  */
-
 function isSaveRequest(options) {
   // If data is defined we are in a PUT or POST request method otherwise a GET request method
   // Test options.method property isn't efficient because most of REST request which use fetch API doesn't pass this property.
@@ -738,17 +749,18 @@ function isSaveRequest(options) {
     return false;
   }
 }
+
 /**
  * Adds `is_block_editor` parameter to the request in a block editor context.
  *
  * @param {Object} options The initial request.
  */
-
 function addIsBlockEditorToRequest(options) {
   options.path = addQueryArgs(options.path, {
     is_block_editor: true
   });
 }
+
 /**
  * Checks if the given request concerns the current post type.
  *
@@ -762,65 +774,68 @@ function addIsBlockEditorToRequest(options) {
  * @param {Object} options the initial request
  * @returns {boolean} True if the request concerns the current post.
  */
-
 function isCurrentPostRequest(options) {
   // Saving translation data is needed only for all post types.
   // It's done by verifying options.path matches with one of baseURL of all post types
   // and compare current post id with this sent in the request.
+
   // List of post type baseURLs.
-  const postTypeURLs = map(select('core').getEntitiesByKind('postType'), property('baseURL')); // Id from the post currently edited.
+  const postTypeURLs = map(select('core').getEntitiesByKind('postType'), property('baseURL'));
 
-  const postId = select('core/editor').getCurrentPostId(); // Id from the REST request.
+  // Id from the post currently edited.
+  const postId = select('core/editor').getCurrentPostId();
+
+  // Id from the REST request.
   // options.data never isNil here because it's already verified before in isSaveRequest() function.
+  const id = options.data.id;
 
-  const id = options.data.id; // Return true
+  // Return true
   // if REST request baseURL matches with one of the known post type baseURLs
   // and the id from the post currently edited corresponds on the id passed to the REST request
   // Return false otherwise
-
   return -1 !== postTypeURLs.findIndex(function (element) {
-    return new RegExp(`${escapeRegExp(element)}`).test(options.path); // phpcs:ignore WordPress.WhiteSpace.OperatorSpacing.NoSpaceBefore, WordPress.WhiteSpace.OperatorSpacing.NoSpaceAfter
+    return new RegExp(`${escapeRegExp(element)}`).test(options.path);
   }) && postId === id;
 }
+
 /**
  * Checks if the given REST request is for the creation of a new template part translation.
  *
  * @param {Object} options The initial request.
  * @returns {Boolean} True if the request concerns a template part creation.
  */
-
 function isTemplatePartTranslationCreationRequest(options) {
   return 'POST' == options.method && options.path.match(/^\/wp\/v2\/template-parts(?:\/|\?|$)/) && !isNil(options.data.from_post) && !isNil(options.data.lang);
 }
+
 /**
  * Adds language as query string parameter to the given request.
  *
  * @param {Object} options         The initial request.
  * @param {string} currentLanguage The language code to add to the request.
  */
-
 function addLanguageToRequest(options, currentLanguage) {
   const hasLangArg = hasQueryArg(options.path, 'lang');
   const filterLang = isUndefined(options.filterLang) || options.filterLang;
-
   if (filterLang && !hasLangArg) {
     options.path = addQueryArgs(options.path, {
       lang: currentLanguage
     });
   }
 }
+
 /**
  * Adds `include_untranslated` parameter to the request.
  *
  * @param {Object} options The initial request.
  * @returns {void}
  */
-
 function addIncludeUntranslatedParam(options) {
   options.path = addQueryArgs(options.path, {
     include_untranslated: true
   });
 }
+
 /**
  * Use addIncludeUntranslatedParam if the given page is a template part page.
  * Or if the template editing mode is enabled inside post editing.
@@ -828,49 +843,45 @@ function addIncludeUntranslatedParam(options) {
  * @param {Object} options The initial request.
  * @returns {void}
  */
-
 function maybeRequireIncludeUntranslatedTemplate(options) {
   var _select;
-
   const params = new URL(document.location).searchParams;
   const postType = params.get('postType');
   const postId = params.get('postId');
   const isEditingTemplate = (_select = select(MODULE_POST_EDITOR_KEY)) === null || _select === void 0 ? void 0 : _select.isEditingTemplate();
-
   if ("wp_template_part" === postType && !isNil(postId) || isEditingTemplate) {
     addIncludeUntranslatedParam(options);
   }
 }
+
 /**
  * Returns true if the given post is a template part, false otherwise.
  *
  * @param {Object} post A post object.
  * @returns {boolean} Whether it is a template part or not.
  */
-
 function isTemplatePart(post) {
   return 'wp_template_part' === post.type;
 }
+
 /**
  * Returns the current post type considering the Site Editor or Post Editor.
  *
  * @returns {string} The current post type.
  */
-
 function getCurrentPostType() {
   if (isSiteBlockEditor()) {
     return select(MODULE_SITE_EDITOR_KEY).getEditedPostType();
   }
-
   return select(MODULE_CORE_EDITOR_KEY).getCurrentPostType();
 }
+
 /**
  * Gets the default language from a translations table.
  *
  * @param {Object} translationsTable The translations table data with language codes as keys and data object as values.
  * @returns {Object} The default language.
  */
-
 function getDefaultLangFromTable(translationsTable) {
   let defaultLang = {};
   translationsTable.forEach(translation => {
@@ -880,21 +891,19 @@ function getDefaultLangFromTable(translationsTable) {
   });
   return defaultLang;
 }
+
 /**
  * Returns a regular expression ready to use to perform search and replace.
  *
  * @returns {RegExp} The regular expression.
  */
-
 function getLangSlugRegex() {
   let languageCheckPattern = TEMPLATE_PART_SLUG_CHECK_LANGUAGE_PATTERN;
   const languages = select(MODULE_KEY).getLanguages();
   const languageSlugs = Array.from(languages.keys());
-
   if (!isEmpty(languageSlugs)) {
     languageCheckPattern = languageSlugs.join('|');
   }
-
   return new RegExp(`${TEMPLATE_PART_SLUG_SEPARATOR}(?:${languageCheckPattern})$`);
 }
 ;// CONCATENATED MODULE: ./modules/block-editor/js/sidebar/store/index.js
@@ -906,10 +915,11 @@ function getLangSlugRegex() {
 
 
 
+
+
 /**
  * Internal dependencies
  */
-
 
 
 const actions = {
@@ -919,7 +929,6 @@ const actions = {
       languages
     };
   },
-
   setCurrentUser(currentUser) {
     let save = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
     return {
@@ -928,89 +937,78 @@ const actions = {
       save
     };
   },
-
   setFromPost(fromPost) {
     return {
       type: 'SET_FROM_POST',
       fromPost
     };
   },
-
   fetchFromAPI(options) {
     return {
       type: 'FETCH_FROM_API',
       options
     };
   },
-
   setCurrentTemplatePart(currentTemplatePart) {
     return {
       type: 'SET_CURRENT_TEMPLATE_PART',
       currentTemplatePart
     };
   }
-
 };
 const store = (0,external_this_wp_data_.createReduxStore)(settings_MODULE_KEY, {
   reducer() {
     let state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : DEFAULT_STATE;
     let action = arguments.length > 1 ? arguments[1] : undefined;
-
     switch (action.type) {
       case 'SET_LANGUAGES':
-        return { ...state,
+        return {
+          ...state,
           languages: action.languages
         };
-
       case 'SET_CURRENT_USER':
         if (action.save) {
           updateCurrentUser(action.currentUser);
         }
-
-        return { ...state,
+        return {
+          ...state,
           currentUser: action.currentUser
         };
-
       case 'SET_FROM_POST':
-        return { ...state,
+        return {
+          ...state,
           fromPost: action.fromPost
         };
-
       case 'SET_CURRENT_TEMPLATE_PART':
-        return { ...state,
+        return {
+          ...state,
           currentTemplatePart: action.currentTemplatePart
         };
-
       default:
         return state;
     }
   },
-
   selectors: {
     getLanguages(state) {
       return state.languages;
     },
-
     getCurrentUser(state) {
       return state.currentUser;
     },
-
     getFromPost(state) {
       return state.fromPost;
     },
-
     getCurrentTemplatePart(state) {
       return state.currentTemplatePart;
     }
-
   },
   actions,
   controls: {
     FETCH_FROM_API(action) {
-      return external_this_wp_apiFetch_default()({ ...action.options
+      return external_this_wp_apiFetch_default()({
+        ...action.options
       });
     }
-
   },
   resolvers: {
     *getLanguages() {
@@ -1021,7 +1019,6 @@ const store = (0,external_this_wp_data_.createReduxStore)(settings_MODULE_KEY, {
       });
       return actions.setLanguages(convertArrayToMap(languages, 'slug'));
     },
-
     *getCurrentUser() {
       const path = '/wp/v2/users/me';
       const currentUser = yield actions.fetchFromAPI({
@@ -1030,43 +1027,44 @@ const store = (0,external_this_wp_data_.createReduxStore)(settings_MODULE_KEY, {
       });
       return actions.setCurrentUser(currentUser);
     },
-
     *getCurrentTemplatePart() {
       const currentTemplatePart = getCurrentTemplateFromDataStore();
       return actions.setCurrentTemplatePart(currentTemplatePart);
     }
-
   }
 });
 (0,external_this_wp_data_.register)(store);
+
 /**
  * Wait for the whole post block editor context has been initialized: current post loaded and languages list initialized.
  */
-
 const isBlockPostEditorContextInitialized = () => {
-  // save url params espacially when a new translation is creating
-  saveURLParams(); // call to getCurrentUser to force call to resolvers and initialize state
+  if (isNil(select(MODULE_CORE_EDITOR_KEY))) {
+    return Promise.reject("Polylang languages panel can't be initialized because block editor isn't fully initialized.");
+  }
 
+  // save url params espacially when a new translation is creating
+  saveURLParams();
+  // call to getCurrentUser to force call to resolvers and initialize state
   const currentUser = select(MODULE_KEY).getCurrentUser();
+
   /**
    * Set a promise for waiting for the current post has been fully loaded before making other processes.
    */
-
   const isCurrentPostLoaded = new Promise(function (resolve) {
     let unsubscribe = subscribe(function () {
       const currentPost = select(MODULE_CORE_EDITOR_KEY).getCurrentPost();
-
       if (!isEmpty(currentPost)) {
         unsubscribe();
         resolve();
       }
     });
-  }); // Wait for current post has been loaded and languages list initialized.
+  });
 
+  // Wait for current post has been loaded and languages list initialized.
   return Promise.all([isCurrentPostLoaded, isLanguagesinitialized]).then(function () {
     // If we come from another post for creating a new one, we have to update translations from the original post.
     const fromPost = select(MODULE_KEY).getFromPost();
-
     if (!isNil(fromPost) && !isNil(fromPost.id)) {
       const lang = select(MODULE_CORE_EDITOR_KEY).getEditedPostAttribute('lang');
       const translations = select(MODULE_CORE_EDITOR_KEY).getEditedPostAttribute('translations');
@@ -1078,36 +1076,34 @@ const isBlockPostEditorContextInitialized = () => {
     }
   });
 };
+
 /**
  * Wait for the whole site editor context to be initialized: current template loaded and languages list initialized.
  */
-
 const isSiteEditorContextInitialized = () => {
   // save url params espacially when a new translation is creating
   saveURLParams();
+
   /**
    * Set a promise to wait for the current user to be fully loaded before making other processes.
    */
-
   const isCurrentUserLoaded = new Promise(function (resolve) {
     let unsubscribe = subscribe(function () {
       const currentUser = select(MODULE_KEY).getCurrentUser();
-
       if (!isNil(currentUser) && !isEmpty(currentUser)) {
         unsubscribe();
         resolve();
       }
     });
   });
+
   /**
    * Set a promise to wait for the current template to be fully loaded before making other processes.
    * It allows to see if both Site Editor and Core stores are available (@see getCurrentTemplateFromDataStore()).
    */
-
   const isTemplatePartLoaded = new Promise(function (resolve) {
     let unsubscribe = subscribe(function () {
       const currentTemplatePart = getCurrentTemplateFromDataStore();
-
       if (!isNil(currentTemplatePart) && !isEmpty(currentTemplatePart)) {
         unsubscribe();
         resolve();
@@ -1119,44 +1115,42 @@ const isSiteEditorContextInitialized = () => {
    * Sets the duplication of template part to true as default behavior.
    */
   () => {
-    const currentUser = select(MODULE_KEY).getCurrentUser(); // If pll_duplicate_content user meta is a string, it have never been created
-    // So we initialize it as an object
+    const currentUser = select(MODULE_KEY).getCurrentUser();
 
+    // If pll_duplicate_content user meta is a string, it have never been created
+    // So we initialize it as an object
     if (isString(currentUser.pll_duplicate_content)) {
       currentUser.pll_duplicate_content = {};
     }
-
     currentUser.pll_duplicate_content['wp_template_part'] = true;
     dispatch(MODULE_KEY).setCurrentUser({
       pll_duplicate_content: currentUser.pll_duplicate_content
     }, true);
   });
 };
+
 /**
  * Set a promise for waiting for the languages list is correctly initialized before making other processes.
  */
-
 const isLanguagesinitialized = new Promise(function (resolve) {
   let unsubscribe = (0,external_this_wp_data_.subscribe)(function () {
     const languages = (0,external_this_wp_data_.select)(settings_MODULE_KEY).getLanguages();
-
     if (languages.size > 0) {
       unsubscribe();
       resolve();
     }
   });
 });
+
 /**
  * Save query string parameters from URL. They could be needed after
  * They could be null if they does not exist
  */
-
 function saveURLParams() {
   // Variable window.location.search isn't use directly
   // Function getSearchParams return an URLSearchParams object for manipulating each parameter
   // Each of them are sanitized below
   const searchParams = getSearchParams(window.location.search); // phpcs:ignore WordPressVIPMinimum.JS.Window.location
-
   if (null !== searchParams) {
     dispatch(MODULE_KEY).setFromPost({
       id: wp.sanitize.stripTagsAndEncodeText(searchParams.get('from_post')),
@@ -1165,13 +1159,12 @@ function saveURLParams() {
     });
   }
 }
+
 /**
  * Save current user when it is wondered
  *
  * @param {object} currentUser
  */
-
-
 function updateCurrentUser(currentUser) {
   external_this_wp_apiFetch_default()({
     path: '/wp/v2/users/me',
@@ -1179,23 +1172,20 @@ function updateCurrentUser(currentUser) {
     method: 'POST'
   });
 }
+
 /**
  * Gets the current template using the Site Editor store and the Core store.
  *
  * @returns {object} The current template object.
  */
-
-
 function getCurrentTemplateFromDataStore() {
   var _select, _select2;
-
   const currentTemplateId = (_select = (0,external_this_wp_data_.select)(settings_MODULE_SITE_EDITOR_KEY)) === null || _select === void 0 ? void 0 : _select.getEditedPostId();
   const currentTemplateType = (_select2 = (0,external_this_wp_data_.select)(settings_MODULE_SITE_EDITOR_KEY)) === null || _select2 === void 0 ? void 0 : _select2.getEditedPostType();
   return (0,external_this_wp_data_.select)(MODULE_CORE_KEY).getEntityRecord('postType', currentTemplateType, currentTemplateId);
 }
 /* harmony default export */ const sidebar_store = ((/* unused pure expression or super */ null && (store)));
 ;// CONCATENATED MODULE: ./modules/block-editor/js/blocks/attributes.js
-
 
 /**
  * Add blocks attributes
@@ -1214,10 +1204,10 @@ function getCurrentTemplateFromDataStore() {
 
 
 
+
 /**
  * Internal dependencies
  */
-
 
 
 
@@ -1226,27 +1216,22 @@ const LanguageAttribute = {
   type: 'string',
   default: 'every'
 };
-
 const addLangChoiceAttribute = function (settings, name) {
   const unallowedBlockNames = ['core/widget-area', 'core/legacy-widget'];
-
   if (unallowedBlockNames.find(element => element === name) || !isWidgetsBlockEditor() && !isWidgetsCustomizerEditor()) {
     return settings;
   }
-
   settings.attributes = (0,external_lodash_.assign)(settings.attributes, {
     pll_lang: LanguageAttribute
   });
   return settings;
 };
-
 (0,external_this_wp_hooks_.addFilter)('blocks.registerBlockType', 'pll/lang-choice', addLangChoiceAttribute);
 const withInspectorControls = (0,external_this_wp_compose_.createHigherOrderComponent)(BlockEdit => {
   return props => {
     if (!isWidgetsBlockEditor() && !isWidgetsCustomizerEditor()) {
       return (0,external_this_wp_element_.createElement)(BlockEdit, props);
     }
-
     const languages = (0,external_this_wp_data_.select)(settings_MODULE_KEY).getLanguages();
     const {
       pll_lang
@@ -1281,7 +1266,6 @@ var external_this_wp_serverSideRender_ = __webpack_require__(169);
 var external_this_wp_serverSideRender_default = /*#__PURE__*/__webpack_require__.n(external_this_wp_serverSideRender_);
 ;// CONCATENATED MODULE: ./modules/block-editor/js/blocks/language-switcher-edit.js
 
-
 /**
  * @package Polylang-Pro
  */
@@ -1289,6 +1273,7 @@ var external_this_wp_serverSideRender_default = /*#__PURE__*/__webpack_require__
 /**
  * External dependencies
  */
+
 
 /**
  * WordPress dependencies
@@ -1311,20 +1296,19 @@ function createLanguageSwitcherEdit(props) {
         [propName]: !value
       };
       let forcedAttributeName;
-      let forcedAttributeUnchecked; // Both show_names and show_flags attributes can't be unchecked together.
+      let forcedAttributeUnchecked;
 
+      // Both show_names and show_flags attributes can't be unchecked together.
       switch (propName) {
         case 'show_names':
           forcedAttributeName = 'show_flags';
           forcedAttributeUnchecked = !props.attributes[forcedAttributeName];
           break;
-
         case 'show_flags':
           forcedAttributeName = 'show_names';
           forcedAttributeUnchecked = !props.attributes[forcedAttributeName];
           break;
       }
-
       if ('show_names' === propName || 'show_flags' === propName) {
         if (value && forcedAttributeUnchecked) {
           updatedAttributes = (0,external_lodash_.assign)(updatedAttributes, {
@@ -1332,11 +1316,9 @@ function createLanguageSwitcherEdit(props) {
           });
         }
       }
-
       setAttributes(updatedAttributes);
     };
   };
-
   const toggleDropdown = createToggleAttribute('dropdown');
   const toggleShowNames = createToggleAttribute('show_names');
   const toggleShowFlags = createToggleAttribute('show_flags');
@@ -1351,7 +1333,6 @@ function createLanguageSwitcherEdit(props) {
     hide_current,
     hide_if_no_translation
   } = props.attributes;
-
   function ToggleControlDropdown() {
     return (0,external_this_wp_element_.createElement)(external_this_wp_components_.ToggleControl, {
       label: i18nAttributeStrings.dropdown,
@@ -1359,7 +1340,6 @@ function createLanguageSwitcherEdit(props) {
       onChange: toggleDropdown
     });
   }
-
   function ToggleControlShowNames() {
     return (0,external_this_wp_element_.createElement)(external_this_wp_components_.ToggleControl, {
       label: i18nAttributeStrings.show_names,
@@ -1367,7 +1347,6 @@ function createLanguageSwitcherEdit(props) {
       onChange: toggleShowNames
     });
   }
-
   function ToggleControlShowFlags() {
     return (0,external_this_wp_element_.createElement)(external_this_wp_components_.ToggleControl, {
       label: i18nAttributeStrings.show_flags,
@@ -1375,7 +1354,6 @@ function createLanguageSwitcherEdit(props) {
       onChange: toggleShowFlags
     });
   }
-
   function ToggleControlForceHome() {
     return (0,external_this_wp_element_.createElement)(external_this_wp_components_.ToggleControl, {
       label: i18nAttributeStrings.force_home,
@@ -1383,7 +1361,6 @@ function createLanguageSwitcherEdit(props) {
       onChange: toggleForceHome
     });
   }
-
   function ToggleControlHideCurrent() {
     return (0,external_this_wp_element_.createElement)(external_this_wp_components_.ToggleControl, {
       label: i18nAttributeStrings.hide_current,
@@ -1391,7 +1368,6 @@ function createLanguageSwitcherEdit(props) {
       onChange: toggleHideCurrent
     });
   }
-
   function ToggleControlHideIfNoTranslations() {
     return (0,external_this_wp_element_.createElement)(external_this_wp_components_.ToggleControl, {
       label: i18nAttributeStrings.hide_if_no_translation,
@@ -1399,7 +1375,6 @@ function createLanguageSwitcherEdit(props) {
       onChange: toggleHideIfNoTranslation
     });
   }
-
   return {
     ToggleControlDropdown,
     ToggleControlShowNames,
@@ -1410,7 +1385,6 @@ function createLanguageSwitcherEdit(props) {
   };
 }
 ;// CONCATENATED MODULE: ./modules/block-editor/js/blocks/block.js
-
 
 /**
  * Register language switcher block.
@@ -1430,19 +1404,20 @@ function createLanguageSwitcherEdit(props) {
 
 
 /**
+ * External dependencies
+ */
+
+
+/**
  * Internal dependencies
  */
 
 
-
-
 const blocktitle = (0,external_this_wp_i18n_.__)('Language switcher', 'polylang-pro');
-
 const descriptionTitle = (0,external_this_wp_i18n_.__)('Add a language switcher to allow your visitors to select their preferred language.', 'polylang-pro');
+const panelTitle = (0,external_this_wp_i18n_.__)('Language switcher settings', 'polylang-pro');
 
-const panelTitle = (0,external_this_wp_i18n_.__)('Language switcher settings', 'polylang-pro'); // Register the Language Switcher block as first level block in Block Editor.
-
-
+// Register the Language Switcher block as first level block in Block Editor.
 (0,external_this_wp_blocks_.registerBlockType)('polylang/language-switcher', {
   title: blocktitle,
   description: descriptionTitle,
@@ -1468,8 +1443,9 @@ const panelTitle = (0,external_this_wp_i18n_.__)('Language switcher settings', '
       attributes: props.attributes
     })));
   }
-}); // Register the Language Switcher block as child block of core/navigation block.
+});
 
+// Register the Language Switcher block as child block of core/navigation block.
 const navigationLanguageSwitcherName = 'polylang/navigation-language-switcher';
 (0,external_this_wp_blocks_.registerBlockType)(navigationLanguageSwitcherName, {
   title: blocktitle,
@@ -1477,6 +1453,32 @@ const navigationLanguageSwitcherName = 'polylang/navigation-language-switcher';
   icon: library_translation,
   category: 'widgets',
   parent: ['core/navigation'],
+  attributes: {
+    dropdown: {
+      type: 'boolean',
+      default: false
+    },
+    show_names: {
+      type: 'boolean',
+      default: true
+    },
+    show_flags: {
+      type: 'boolean',
+      default: false
+    },
+    force_home: {
+      type: 'boolean',
+      default: false
+    },
+    hide_current: {
+      type: 'boolean',
+      default: false
+    },
+    hide_if_no_translation: {
+      type: 'boolean',
+      default: false
+    }
+  },
   transforms: {
     from: [{
       type: 'block',
@@ -1484,11 +1486,16 @@ const navigationLanguageSwitcherName = 'polylang/navigation-language-switcher';
       transform: () => (0,external_this_wp_blocks_.createBlock)(navigationLanguageSwitcherName)
     }]
   },
+  usesContext: ['textColor', 'customTextColor', 'backgroundColor', 'customBackgroundColor', 'overlayTextColor', 'customOverlayTextColor', 'overlayBackgroundColor', 'customOverlayBackgroundColor', 'fontSize', 'customFontSize', 'showSubmenuIcon', 'openSubmenusOnClick', 'style'],
   example: {},
   edit: props => {
     const {
       dropdown
     } = props.attributes;
+    const {
+      showSubmenuIcon,
+      openSubmenusOnClick
+    } = props.context;
     const {
       ToggleControlDropdown,
       ToggleControlShowNames,
@@ -1499,12 +1506,15 @@ const navigationLanguageSwitcherName = 'polylang/navigation-language-switcher';
     } = createLanguageSwitcherEdit(props);
     return (0,external_this_wp_element_.createElement)(external_this_wp_element_.Fragment, null, (0,external_this_wp_element_.createElement)(external_this_wp_blockEditor_.InspectorControls, null, (0,external_this_wp_element_.createElement)(external_this_wp_components_.PanelBody, {
       title: panelTitle
-    }, (0,external_this_wp_element_.createElement)(ToggleControlDropdown, null), (0,external_this_wp_element_.createElement)(ToggleControlShowNames, null), (0,external_this_wp_element_.createElement)(ToggleControlShowFlags, null), (0,external_this_wp_element_.createElement)(ToggleControlForceHome, null), !dropdown && (0,external_this_wp_element_.createElement)(ToggleControlHideCurrent, null), (0,external_this_wp_element_.createElement)(ToggleControlHideIfNoTranslations, null))), (0,external_this_wp_element_.createElement)(external_this_wp_components_.Disabled, null, (0,external_this_wp_element_.createElement)((external_this_wp_serverSideRender_default()), {
+    }, (0,external_this_wp_element_.createElement)(ToggleControlDropdown, null), (0,external_this_wp_element_.createElement)(ToggleControlShowNames, null), (0,external_this_wp_element_.createElement)(ToggleControlShowFlags, null), (0,external_this_wp_element_.createElement)(ToggleControlForceHome, null), !dropdown && (0,external_this_wp_element_.createElement)(ToggleControlHideCurrent, null), (0,external_this_wp_element_.createElement)(ToggleControlHideIfNoTranslations, null))), (0,external_this_wp_element_.createElement)(external_this_wp_components_.Disabled, null, (0,external_this_wp_element_.createElement)("div", {
+      className: "wp-block-navigation-item"
+    }, (0,external_this_wp_element_.createElement)((external_this_wp_serverSideRender_default()), {
       block: navigationLanguageSwitcherName,
       attributes: props.attributes
-    })));
+    }), submenuIcon(showSubmenuIcon, openSubmenusOnClick, dropdown))));
   }
 });
+
 /**
  * Apply a callback function on each block of the blocks list.
  *
@@ -1514,7 +1524,6 @@ const navigationLanguageSwitcherName = 'polylang/navigation-language-switcher';
  * @param {mapper} mapper        A callback to change the converted block by another one if necessary
  * @returns {Array} Array of blocks updated.
  */
-
 function mapBlockTree(blocks, menuItems, blocksMapping, mapper) {
   /**
    * A function to apply to each block to convert it if necessary by applying the `mapper` filter.
@@ -1522,12 +1531,13 @@ function mapBlockTree(blocks, menuItems, blocksMapping, mapper) {
    * @param {Object} block The block to replace or not.
    * @returns {Object} The new block potentially replaced by the `mapper`.
   */
-  const convertBlock = block => ({ ...mapper(block, menuItems, blocksMapping),
+  const convertBlock = block => ({
+    ...mapper(block, menuItems, blocksMapping),
     innerBlocks: mapBlockTree(block.innerBlocks, menuItems, blocksMapping, mapper)
   });
-
   return blocks.map(convertBlock);
 }
+
 /**
  * A filter to detect the `core/navigation-link` block not correctly converted from the langauge switcher menu item
  * and convert it to its corresponding `polylang/navigation-language-switcher` block.
@@ -1538,26 +1548,20 @@ function mapBlockTree(blocks, menuItems, blocksMapping, mapper) {
  * @param {Object} blocksMapping The mapping between the menu items and their corresponding blocks.
  * @returns {Object} The block correctly converted.
  */
-
-
 const blocksFilter = (block, menuItems, blocksMapping) => {
   var _block$attributes;
-
   if (block.name === "core/navigation-link" && ((_block$attributes = block.attributes) === null || _block$attributes === void 0 ? void 0 : _block$attributes.url) === "#pll_switcher") {
     const menuItem = (0,external_lodash_.find)(menuItems, {
       url: '#pll_switcher'
     }); // Get the corresponding menu item.
-
     const attributes = menuItem.meta._pll_menu_item; // Get its options.
-
     const newBlock = (0,external_this_wp_blocks_.createBlock)(navigationLanguageSwitcherName, attributes);
     blocksMapping[menuItem.id] = newBlock.clientId; // Update the blocks mapping.
-
     return newBlock;
   }
-
   return block;
 };
+
 /**
  * A filter callback hooked to `blocks.navigation.__unstableMenuItemsToBlocks`.
  *
@@ -1565,17 +1569,32 @@ const blocksFilter = (block, menuItems, blocksMapping) => {
  * @param {Array} menuItems The initial menu items from where the blocks are converted to.
  * @returns {Array} Array of blocks updated.
  */
-
-
-const menuItemsToBlocksFilter = (blocks, menuItems) => ({ ...blocks,
+const menuItemsToBlocksFilter = (blocks, menuItems) => ({
+  ...blocks,
   innerBlocks: mapBlockTree(blocks.innerBlocks, menuItems, blocks.mapping, blocksFilter)
 });
+
+/**
+ * Returns the submenu icon if block parameters allow it.
+ *
+ * @param {bool} showSubmenuIcon     Whether to show submenu icon or not.
+ * @param {bool} openSubmenusOnClick Whether the submenu can be open on click or not.
+ * @param {bool} dropdown            Whether the language switcher is in dropdown mode or not.
+ * @returns The submenu icon or null.
+ */
+const submenuIcon = (showSubmenuIcon, openSubmenusOnClick, dropdown) => {
+  if ((showSubmenuIcon || openSubmenusOnClick) && dropdown) {
+    return (0,external_this_wp_element_.createElement)("span", {
+      className: "wp-block-navigation__submenu-icon"
+    }, (0,external_this_wp_element_.createElement)(submenu, null));
+  }
+  return null;
+};
+
 /**
  * Hooks to the classic menu conversion to core/navigation block to be able to convert
  * the language switcher menu item to its corresponding block.
  */
-
-
 (0,external_this_wp_hooks_.addFilter)('blocks.navigation.__unstableMenuItemsToBlocks', 'polylang/include-language-switcher', menuItemsToBlocksFilter);
 ;// CONCATENATED MODULE: ./modules/block-editor/js/blocks/index.js
 /**

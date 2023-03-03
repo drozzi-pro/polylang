@@ -3,7 +3,7 @@
  * @package Polylang-Pro
  */
 
-defined( 'ABSPATH' ) || exit; // @phpstan-ignore-line
+defined( 'ABSPATH' ) || exit;
 
 /**
  * A class that modifies the template slugs according to their language, and sync them among their translations.
@@ -69,12 +69,13 @@ class PLL_FSE_Template_Slug_Sync extends PLL_FSE_Abstract_Module implements PLL_
 	 * Modifies the template's slug when the template's language changes.
 	 *
 	 * @since 3.2
-	 * @see   wp_set_object_terms()
 	 *
-	 * @param  int               $object_id Object ID.
-	 * @param  array<int|string> $terms     An array of object term IDs or slugs, provided as argument to `wp_set_object_terms()`.
-	 * @param  array<int>        $tt_ids    An array of term taxonomy IDs.
-	 * @param  string            $taxonomy  Taxonomy slug.
+	 * @see wp_set_object_terms()
+	 *
+	 * @param  int            $object_id Object ID.
+	 * @param  (int|string)[] $terms     An array of object term IDs or slugs, provided as argument to `wp_set_object_terms()`.
+	 * @param  int[]          $tt_ids    An array of term taxonomy IDs.
+	 * @param  string         $taxonomy  Taxonomy slug.
 	 * @return void
 	 */
 	public function modify_template_slug_on_lang_assigning( $object_id, $terms, $tt_ids, $taxonomy ) {
@@ -135,9 +136,9 @@ class PLL_FSE_Template_Slug_Sync extends PLL_FSE_Abstract_Module implements PLL_
 	/**
 	 * Synchronizes the template slugs among translations after translations have been set or updated.
 	 *
-	 * @since  3.2
+	 * @since 3.2
 	 *
-	 * @param  int $term_id Term ID.
+	 * @param int $term_id Term ID.
 	 * @return void
 	 */
 	public function sync_template_slugs_on_translations_save( $term_id ) {
@@ -152,12 +153,12 @@ class PLL_FSE_Template_Slug_Sync extends PLL_FSE_Abstract_Module implements PLL_
 	 *
 	 * @since 3.2
 	 *
-	 * @param  string $override_slug The filtered value of the slug (starts as `null` from `apply_filters()`).
-	 * @param  string $desired_slug  The desired slug (post_name).
-	 * @param  int    $post_ID       Post ID.
-	 * @param  string $post_status   Post status.
-	 * @param  string $post_type     Post type.
-	 * @return string                The original or desired slug.
+	 * @param string $override_slug The filtered value of the slug (starts as `null` from `apply_filters()`).
+	 * @param string $desired_slug  The desired slug (post_name).
+	 * @param int    $post_ID       Post ID.
+	 * @param string $post_status   Post status.
+	 * @param string $post_type     Post type.
+	 * @return string The original or desired slug.
 	 */
 	public function unique_template_slug( $override_slug, $desired_slug, $post_ID, $post_status, $post_type ) {
 		if ( empty( $post_ID ) || ! PLL_FSE_Tools::is_template_post_type( $post_type ) ) {
@@ -204,8 +205,8 @@ class PLL_FSE_Template_Slug_Sync extends PLL_FSE_Abstract_Module implements PLL_
 	 *
 	 * @since 3.2
 	 *
-	 * @param  int     $post_ID       Post ID.
-	 * @param  WP_Post $template_post Post object after being updated.
+	 * @param int     $post_ID       Post ID.
+	 * @param WP_Post $template_post Post object after being updated.
 	 * @return void
 	 */
 	public function sync_template_slugs_on_post_update( $post_ID, $template_post ) {
@@ -223,7 +224,7 @@ class PLL_FSE_Template_Slug_Sync extends PLL_FSE_Abstract_Module implements PLL_
 	 *
 	 * @since 3.2
 	 *
-	 * @param  string $post_name The post name.
+	 * @param string $post_name The post name.
 	 * @return string
 	 */
 	private function remove_language_from_post_name( $post_name ) {
@@ -235,8 +236,8 @@ class PLL_FSE_Template_Slug_Sync extends PLL_FSE_Abstract_Module implements PLL_
 	 *
 	 * @since 3.2
 	 *
-	 * @param  string $post_name The post name.
-	 * @param  string $lang_slug The lang code.
+	 * @param string $post_name The post name.
+	 * @param string $lang_slug The lang code.
 	 * @return string
 	 */
 	private function add_language_to_post_name( $post_name, $lang_slug ) {
@@ -248,9 +249,9 @@ class PLL_FSE_Template_Slug_Sync extends PLL_FSE_Abstract_Module implements PLL_
 	 *
 	 * @since 3.2
 	 *
-	 * @param  int    $template_id   A template's ID.
-	 * @param  string $lang_slug     A language slug.
-	 * @param  string $fallback_slug Fallback slug to return if no template slug is found for the given language.
+	 * @param int    $template_id   A template's ID.
+	 * @param string $lang_slug     A language slug.
+	 * @param string $fallback_slug Fallback slug to return if no template slug is found for the given language.
 	 * @return string
 	 */
 	private function get_translation_slug( $template_id, $lang_slug, $fallback_slug ) {
@@ -273,11 +274,12 @@ class PLL_FSE_Template_Slug_Sync extends PLL_FSE_Abstract_Module implements PLL_
 	 * Update a template's slug in the database.
 	 * Also clears the post's cache.
 	 *
-	 * @since  3.2
+	 * @since 3.2
+	 *
 	 * @global wpdb $wpdb
 	 *
-	 * @param  WP_Post $template_post A post ID.
-	 * @param  string  $slug        The new slug.
+	 * @param WP_Post $template_post A post ID.
+	 * @param string  $slug        The new slug.
 	 * @return void
 	 */
 	private function update_template_slug( WP_Post $template_post, $slug ) {
@@ -303,8 +305,8 @@ class PLL_FSE_Template_Slug_Sync extends PLL_FSE_Abstract_Module implements PLL_
 	 *
 	 * @since 3.2
 	 *
-	 * @param  array<int> $translations An associative array of translations with language code as key and
-	 *                                  translation id as value.
+	 * @param int[] $translations An associative array of translations with language code as key
+	 *                            and translation id as value.
 	 * @return void
 	 */
 	private function sync_translation_slugs( array $translations ) {
@@ -367,10 +369,10 @@ class PLL_FSE_Template_Slug_Sync extends PLL_FSE_Abstract_Module implements PLL_
 	 *
 	 * @since 3.2
 	 *
-	 * @param  array<int> $translations An associative array of translations with language code as key and
-	 *                                  translation id as value.
-	 * @return array<WP_Post>           An associative array of translations with language code as key and
-	 *                                  WP_Post object as value.
+	 * @param int[] $translations An associative array of translations with language code as key
+	 *                            and translation id as value.
+	 * @return WP_Post[] An associative array of translations with language code as key
+	 *                   and WP_Post object as value.
 	 */
 	private function get_translation_posts( array $translations ) {
 		/** @var WP_Post[] */

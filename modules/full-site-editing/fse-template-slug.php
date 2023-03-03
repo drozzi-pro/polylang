@@ -3,7 +3,7 @@
  * @package Polylang-Pro
  */
 
-defined( 'ABSPATH' ) || exit; // @phpstan-ignore-line
+defined( 'ABSPATH' ) || exit;
 
 /**
  * A class to work with template slugs (and their language suffix).
@@ -36,7 +36,7 @@ class PLL_FSE_Template_Slug {
 	/**
 	 * The template slug after regex matching.
 	 *
-	 * @var array<string> {
+	 * @var string[] {
 	 *     @type string $slug The template slug without language suffix.
 	 *     @type string $lang The language slug.
 	 * }
@@ -48,8 +48,8 @@ class PLL_FSE_Template_Slug {
 	 *
 	 * @since 3.2
 	 *
-	 * @param  string        $slug       A template slug.
-	 * @param  array<string> $lang_slugs List of language slugs to use.
+	 * @param string   $slug       A template slug.
+	 * @param string[] $lang_slugs List of language slugs to use.
 	 * @return void
 	 */
 	public function __construct( $slug, array $lang_slugs = array() ) {
@@ -125,8 +125,8 @@ class PLL_FSE_Template_Slug {
 	 *
 	 * @since 3.2
 	 *
-	 * @param  string $language_slug A language slug.
-	 * @return string                The template slug with its new language suffix.
+	 * @param string $language_slug A language slug.
+	 * @return string The template slug with its new language suffix.
 	 */
 	public function update_language( $language_slug ) {
 		if ( ! is_string( $language_slug ) || '' === $language_slug ) {

@@ -25,7 +25,7 @@ class PLL_Bulk_Translate {
 	 *
 	 * @since 2.7
 	 *
-	 * @var WP_Screen
+	 * @var WP_Screen|null
 	 */
 	protected $current_screen;
 
@@ -34,7 +34,7 @@ class PLL_Bulk_Translate {
 	 *
 	 * @since 2.7
 	 *
-	 * @var array
+	 * @var array|null
 	 */
 	protected $results;
 
